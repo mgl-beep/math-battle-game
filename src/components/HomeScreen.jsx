@@ -1,6 +1,32 @@
 import PixelCreature from './PixelCreature';
 import { starterCreature } from '../data/creatures';
 import { shopItems } from '../data/shop';
+import { pixelAccessories } from '../data/pixelAccessories';
+
+function PixelOverlay({ itemId, className }) {
+  const data = pixelAccessories[itemId];
+  if (!data) return null;
+  const rows = data.pixels.length;
+  const cols = Math.max(...data.pixels.map(r => r.length));
+  const s = 3;
+  const rects = [];
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < data.pixels[y].length; x++) {
+      const ch = data.pixels[y][x];
+      if (ch === '.') continue;
+      rects.push(
+        <rect key={`${x}-${y}`} x={x * s} y={y * s} width={s} height={s}
+          fill={ch === '0' ? '#222' : data.palette[ch] || '#f0f'} />
+      );
+    }
+  }
+  return (
+    <svg viewBox={`0 0 ${cols * s} ${rows * s}`} className={className}
+      style={{ imageRendering: 'pixelated' }}>
+      {rects}
+    </svg>
+  );
+}
 
 export default function HomeScreen({ gameState, onNavigate }) {
   const { coins, caughtCreatures, badges, equippedItems } = gameState;
@@ -21,7 +47,7 @@ export default function HomeScreen({ gameState, onNavigate }) {
       <div className="home-creature-area">
         <div className="creature-showcase">
           {equippedHat && (
-            <div className="equipped-hat">{equippedHat.emoji}</div>
+            <PixelOverlay itemId={equippedHat.id} className="equipped-hat pixel-hat" />
           )}
           <div className="creature-bounce">
             <PixelCreature
@@ -31,7 +57,7 @@ export default function HomeScreen({ gameState, onNavigate }) {
             />
           </div>
           {equippedAcc && (
-            <div className="equipped-acc">{equippedAcc.emoji}</div>
+            <PixelOverlay itemId={equippedAcc.id} className={`equipped-acc pixel-acc acc-${equippedAcc.id}`} />
           )}
         </div>
         <p className="creature-name">Sparky</p>

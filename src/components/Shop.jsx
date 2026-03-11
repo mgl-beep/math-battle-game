@@ -1,7 +1,33 @@
 import { useState } from 'react';
 import { shopItems, categories, categoryLabels } from '../data/shop';
 import { starterCreature } from '../data/creatures';
+import { pixelAccessories } from '../data/pixelAccessories';
 import PixelCreature from './PixelCreature';
+
+function PixelOverlay({ itemId, className }) {
+  const data = pixelAccessories[itemId];
+  if (!data) return null;
+  const rows = data.pixels.length;
+  const cols = Math.max(...data.pixels.map(r => r.length));
+  const s = 3;
+  const rects = [];
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < data.pixels[y].length; x++) {
+      const ch = data.pixels[y][x];
+      if (ch === '.') continue;
+      rects.push(
+        <rect key={`${x}-${y}`} x={x * s} y={y * s} width={s} height={s}
+          fill={ch === '0' ? '#222' : data.palette[ch] || '#f0f'} />
+      );
+    }
+  }
+  return (
+    <svg viewBox={`0 0 ${cols * s} ${rows * s}`} className={className}
+      style={{ imageRendering: 'pixelated' }}>
+      {rects}
+    </svg>
+  );
+}
 
 export default function Shop({ gameState, onBuy, onEquip, onBack }) {
   const [activeCategory, setActiveCategory] = useState('hat');
@@ -26,13 +52,13 @@ export default function Shop({ gameState, onBuy, onEquip, onBack }) {
       {/* Preview */}
       <div className="shop-preview">
         <div className="creature-showcase small">
-          {equippedHat && <div className="equipped-hat small">{equippedHat.emoji}</div>}
+          {equippedHat && <PixelOverlay itemId={equippedHat.id} className="equipped-hat pixel-hat small" />}
           <PixelCreature
             pixels={starterCreature.pixels}
             palette={starterCreature.palette}
             size={4}
           />
-          {equippedAcc && <div className="equipped-acc small">{equippedAcc.emoji}</div>}
+          {equippedAcc && <PixelOverlay itemId={equippedAcc.id} className={`equipped-acc pixel-acc small acc-${equippedAcc.id}`} />}
         </div>
       </div>
 

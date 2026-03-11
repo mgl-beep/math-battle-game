@@ -121,7 +121,14 @@
   filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3));
 }
 
+.equipped-hat.pixel-hat {
+  width: 50px;
+  height: auto;
+  top: -10px;
+}
+
 .equipped-hat.small { font-size: 1.5rem; top: -15px; }
+.equipped-hat.pixel-hat.small { width: 35px; top: -8px; }
 
 .equipped-acc {
   position: absolute;
@@ -129,6 +136,61 @@
   right: -15px;
   font-size: 1.5rem;
   z-index: 2;
+}
+
+.equipped-acc.pixel-acc {
+  width: 40px;
+  height: auto;
+  bottom: 15px;
+  right: -20px;
+}
+
+/* Glasses sit on the face */
+.acc-acc_glasses {
+  bottom: auto !important;
+  top: 38%;
+  right: auto !important;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 45px !important;
+}
+
+/* Bow on the side of head */
+.acc-acc_bow {
+  bottom: auto !important;
+  top: 5px;
+  right: -15px;
+  width: 30px !important;
+}
+
+/* Star badge on chest */
+.acc-acc_star {
+  bottom: 20px !important;
+  right: auto !important;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px !important;
+}
+
+/* Scarf around neck */
+.acc-acc_scarf {
+  bottom: auto !important;
+  top: 60%;
+  right: auto !important;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 55px !important;
+}
+
+/* Wings on the sides */
+.acc-acc_wings {
+  bottom: auto !important;
+  top: 30%;
+  right: auto !important;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px !important;
+  z-index: 0 !important;
 }
 
 .equipped-acc.small { font-size: 1.2rem; }

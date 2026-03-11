@@ -62,13 +62,13 @@ export const routeNames = {
 
 export const routeColors = {
   1: '#FFAB91',
-  2: '#FFF59D',
+  2: '#D4AA00',
   3: '#A5D6A7',
   4: '#81D4FA',
   5: '#BCAAA4',
   6: '#FF8C42',
   7: '#64C8FF',
   8: '#7BC67E',
-  9: '#FFE066',
+  9: '#D4A017',
   10: '#D59BF6',
 };
