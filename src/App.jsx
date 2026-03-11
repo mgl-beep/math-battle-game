@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { useGameState } from './hooks/useGameState';
 import { checkBadges, badgeDefinitions } from './data/badges';
 import HomeScreen from './components/HomeScreen';
@@ -137,6 +138,7 @@ export default function App() {
           </div>
         </div>
       )}
+      <Analytics />
     </div>
   );
 }
