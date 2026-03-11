@@ -36,6 +36,9 @@ export default function App() {
       game.catchCreature(result.creatureId, result.shiny);
     }
 
+    // Track per-level wins/perfects for evolution
+    game.recordLevelBattle(battleLevel, result.won, result.perfect);
+
     const currentState = {
       ...game.state,
       coins: game.state.coins + result.coinsEarned,

@@ -363,3 +363,61 @@ export const creatureOrder = [
   'puffkin', 'twinklet', 'cloverkit', 'breezy', 'rockling',
   'flamander', 'bubblefish', 'sproutlet', 'zapbun', 'cosmopuff',
 ];
+
+// Evolution stage names and requirements
+export const evolutionStages = [
+  { name: 'Wild', label: '???', requirement: null },
+  { name: 'Base', label: 'Stage 1', requirement: 'Catch it!' },
+  { name: 'Evolved', label: 'Stage 2', requirement: 'Win 3 battles on this level' },
+  { name: 'Ultimate', label: 'Stage 3', requirement: '2 perfect rounds on this level' },
+];
+
+// Get evolution stage: 0=uncaught, 1=caught, 2=evolved, 3=ultimate
+export function getEvolutionStage(creatureId, gameState) {
+  if (!gameState.caughtCreatures.includes(creatureId)) return 0;
+
+  const creature = creatureData[creatureId];
+  if (!creature) return 1;
+
+  const stats = gameState.levelStats[creature.level] || { wins: 0, perfects: 0 };
+  if (stats.perfects >= 2) return 3;
+  if (stats.wins >= 3) return 2;
+  return 1;
+}
+
+// Get the palette for a creature based on evolution stage
+// Stage 1: base palette, Stage 2: brighter/saturated, Stage 3: glowing/ultimate
+export function getCreaturePalette(creature, stage, isShiny = false) {
+  if (isShiny) return creature.shinyPalette;
+  if (stage <= 1) return creature.palette;
+
+  // Stage 2: brighten all colors
+  if (stage === 2) {
+    const evolved = {};
+    for (const [key, color] of Object.entries(creature.palette)) {
+      evolved[key] = brightenColor(color, 20);
+    }
+    return evolved;
+  }
+
+  // Stage 3: saturate + brighten even more
+  const ultimate = {};
+  for (const [key, color] of Object.entries(creature.palette)) {
+    ultimate[key] = brightenColor(color, 40);
+  }
+  return ultimate;
+}
+
+// Get the evolution suffix for creature name
+export function getCreatureDisplayName(creature, stage) {
+  if (stage <= 1) return creature.name;
+  if (stage === 2) return `${creature.name} ✦`;
+  return `${creature.name} ★`;
+}
+
+function brightenColor(hex, amount) {
+  const r = Math.min(255, parseInt(hex.slice(1, 3), 16) + amount);
+  const g = Math.min(255, parseInt(hex.slice(3, 5), 16) + amount);
+  const b = Math.min(255, parseInt(hex.slice(5, 7), 16) + amount);
+  return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+}

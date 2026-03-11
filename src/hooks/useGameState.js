@@ -13,6 +13,7 @@ const defaultState = {
   perfectRounds: 0,
   winStreak: 0,
   speedStreak: 0,
+  // Per-level stats: { [level]: { wins: 0, perfects: 0 } }
   levelStats: {},
 };
 
@@ -70,6 +71,18 @@ export function useGameState() {
     });
   }, [update]);
 
+  const recordLevelBattle = useCallback((level, won, perfect) => {
+    update(prev => {
+      const stats = { ...prev.levelStats };
+      const current = stats[level] || { wins: 0, perfects: 0 };
+      stats[level] = {
+        wins: current.wins + (won ? 1 : 0),
+        perfects: current.perfects + (perfect ? 1 : 0),
+      };
+      return { ...prev, levelStats: stats };
+    });
+  }, [update]);
+
   const buyItem = useCallback((itemId) => {
     update(prev => {
       if (prev.ownedItems.includes(itemId)) return prev;
@@ -112,6 +125,7 @@ export function useGameState() {
     addCoins,
     spendCoins,
     catchCreature,
+    recordLevelBattle,
     buyItem,
     equipItem,
     recordBattle,
@@ -120,3 +134,4 @@ export function useGameState() {
     update,
   };
 }
+

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { creatureData, creatureOrder } from '../data/creatures';
+import { creatureData, creatureOrder, getEvolutionStage, getCreaturePalette, getCreatureDisplayName } from '../data/creatures';
 import { routeNames, routeColors } from '../data/mathFacts';
 import PixelCreature from './PixelCreature';
 
@@ -35,7 +35,11 @@ export default function LevelSelect({ gameState, onSelectLevel, onBack }) {
           const creatureId = creatureOrder[num - 1];
           const creature = creatureData[creatureId];
           const caught = gameState.caughtCreatures.includes(creatureId);
+          const stage = getEvolutionStage(creatureId, gameState);
           const color = routeColors[num];
+          const palette = caught
+            ? getCreaturePalette(creature, stage)
+            : Object.fromEntries(Object.keys(creature.palette).map(k => [k, '#555']));
 
           return (
             <button
@@ -45,12 +49,10 @@ export default function LevelSelect({ gameState, onSelectLevel, onBack }) {
               onClick={() => onSelectLevel(num, operation)}
             >
               <div className="level-card-top" style={{ background: `${color}22` }}>
-                <div className={`level-creature-preview ${caught ? '' : 'silhouette'}`}>
+                <div className={`level-creature-preview ${caught ? '' : 'silhouette'} ${stage >= 3 ? 'glow-ultimate' : stage >= 2 ? 'glow-evolved' : ''}`}>
                   <PixelCreature
                     pixels={creature.pixels}
-                    palette={caught ? creature.palette : Object.fromEntries(
-                      Object.keys(creature.palette).map(k => [k, '#555'])
-                    )}
+                    palette={palette}
                     size={3}
                   />
                 </div>
@@ -61,9 +63,10 @@ export default function LevelSelect({ gameState, onSelectLevel, onBack }) {
                 </span>
                 <span className="route-name">{routeNames[num]}</span>
                 <span className="creature-name-small">
-                  {caught ? creature.name : '???'}
+                  {caught ? getCreatureDisplayName(creature, stage) : '???'}
                 </span>
                 {caught && <span className="caught-badge">✓ Caught</span>}
+                {stage >= 2 && <span className={`evo-badge stage-${stage}`}>{stage >= 3 ? '★ Ultimate' : '✦ Evolved'}</span>}
               </div>
             </button>
           );

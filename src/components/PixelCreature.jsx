@@ -1,5 +1,5 @@
 // Renders a creature from pixel grid data
-export default function PixelCreature({ pixels, palette, size = 4, className = '', style = {} }) {
+export default function PixelCreature({ pixels, palette, size = 4, maxWidth, className = '', style = {} }) {
   if (!pixels || !palette) return null;
 
   const rows = pixels.length;
@@ -29,10 +29,14 @@ export default function PixelCreature({ pixels, palette, size = 4, className = '
   return (
     <svg
       viewBox={`0 0 ${w} ${h}`}
-      width={w * 3}
-      height={h * 3}
       className={`pixel-creature ${className}`}
-      style={{ imageRendering: 'pixelated', ...style }}
+      style={{
+        imageRendering: 'pixelated',
+        width: maxWidth || w * 3,
+        height: 'auto',
+        maxWidth: '100%',
+        ...style,
+      }}
     >
       {rects}
     </svg>

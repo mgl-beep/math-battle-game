@@ -4,7 +4,7 @@ export function generateFacts(num, operation = 'multiply') {
   const facts = [];
 
   if (operation === 'multiply') {
-    for (let i = 1; i <= 12; i++) {
+    for (let i = 1; i <= 10; i++) {
       facts.push({
         question: `${num} × ${i}`,
         answer: num * i,
@@ -20,7 +20,7 @@ export function generateFacts(num, operation = 'multiply') {
     }
   } else {
     // Division: (num × i) ÷ num = i, and (num × i) ÷ i = num
-    for (let i = 1; i <= 12; i++) {
+    for (let i = 1; i <= 10; i++) {
       facts.push({
         question: `${num * i} ÷ ${num}`,
         answer: i,
