@@ -139,20 +139,31 @@ export default function BattleScreen({ level, operation = 'multiply', onComplete
         <div className="battle-result">
           {won ? (
             <>
-              <h2 className="result-title win">You caught {creature.name}! 🎉</h2>
-              <div className={`creature-victory ${shiny ? 'shiny-glow' : ''}`}>
-                <PixelCreature
-                  pixels={creature.pixels}
-                  palette={shiny ? creature.shinyPalette : creature.palette}
-                  size={5}
-                />
-                {shiny && <div className="shiny-label">★ SHINY ★</div>}
+              <h2 className="result-title win">You caught {creature.name}!</h2>
+              <div className="victory-scene">
+                <div className="confetti-burst">
+                  {[...Array(12)].map((_, i) => (
+                    <span key={i} className={`confetti c${i}`} />
+                  ))}
+                </div>
+                <div className={`creature-victory ${shiny ? 'shiny-glow' : ''}`}>
+                  <PixelCreature
+                    pixels={creature.pixels}
+                    palette={shiny ? creature.shinyPalette : creature.palette}
+                    size={6}
+                  />
+                  {shiny && <div className="shiny-label">★ SHINY ★</div>}
+                </div>
+                <div className="victory-sparkles">
+                  <span className="sparkle s0">★</span>
+                  <span className="sparkle s1">✦</span>
+                  <span className="sparkle s2">★</span>
+                  <span className="sparkle s3">✦</span>
+                  <span className="sparkle s4">★</span>
+                  <span className="sparkle s5">✦</span>
+                </div>
               </div>
-              <div className="victory-dance">
-                <span className="dance-star">⭐</span>
-                <span className="dance-star delay1">✨</span>
-                <span className="dance-star delay2">🌟</span>
-              </div>
+              <p className="gotcha-text">Gotcha!</p>
             </>
           ) : (
             <>

@@ -551,12 +551,95 @@
 .result-title.win { color: #2ecc71; }
 .result-title.lose { color: #e74c3c; }
 
+.victory-scene {
+  position: relative;
+  margin: 1.5rem 0 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .creature-victory {
-  margin: 1rem 0;
-  animation: bounce 1s ease-in-out infinite;
+  animation: happy-dance 0.6s ease-in-out infinite;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes happy-dance {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  15% { transform: translateY(-12px) rotate(-8deg); }
+  30% { transform: translateY(0) rotate(0deg); }
+  45% { transform: translateY(-12px) rotate(8deg); }
+  60% { transform: translateY(0) rotate(0deg); }
+  75% { transform: translateY(-6px) scale(1.05); }
+  90% { transform: translateY(0) scale(1); }
 }
 
 .shiny-glow { filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.6)); }
+
+/* Confetti burst */
+.confetti-burst { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.confetti {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  top: 50%;
+  left: 50%;
+  animation: confetti-pop 1.2s ease-out forwards;
+}
+.c0  { background: #e74c3c; --cx: -60px; --cy: -80px; --cr: 200deg; animation-delay: 0s; }
+.c1  { background: #f39c12; --cx: 50px; --cy: -70px; --cr: -150deg; animation-delay: 0.05s; }
+.c2  { background: #2ecc71; --cx: -40px; --cy: -90px; --cr: 180deg; animation-delay: 0.1s; }
+.c3  { background: #3498db; --cx: 70px; --cy: -50px; --cr: -120deg; animation-delay: 0.15s; }
+.c4  { background: #9b59b6; --cx: -80px; --cy: -40px; --cr: 250deg; animation-delay: 0.08s; }
+.c5  { background: #e91e63; --cx: 30px; --cy: -95px; --cr: -200deg; animation-delay: 0.12s; }
+.c6  { background: #f1c40f; --cx: -55px; --cy: -60px; --cr: 160deg; animation-delay: 0.18s; }
+.c7  { background: #1abc9c; --cx: 65px; --cy: -85px; --cr: -180deg; animation-delay: 0.06s; }
+.c8  { background: #e74c3c; --cx: -30px; --cy: -75px; --cr: 220deg; animation-delay: 0.2s; }
+.c9  { background: #3498db; --cx: 45px; --cy: -55px; --cr: -140deg; animation-delay: 0.14s; }
+.c10 { background: #2ecc71; --cx: -70px; --cy: -65px; --cr: 190deg; animation-delay: 0.22s; }
+.c11 { background: #f39c12; --cx: 55px; --cy: -90px; --cr: -170deg; animation-delay: 0.1s; }
+
+@keyframes confetti-pop {
+  0% { transform: translate(0, 0) rotate(0deg) scale(0); opacity: 1; }
+  20% { transform: translate(calc(var(--cx) * 0.3), calc(var(--cy) * 0.3)) rotate(calc(var(--cr) * 0.3)) scale(1.2); opacity: 1; }
+  100% { transform: translate(var(--cx), calc(var(--cy) + 60px)) rotate(var(--cr)) scale(0.5); opacity: 0; }
+}
+
+/* Sparkles around creature */
+.victory-sparkles { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.sparkle {
+  position: absolute;
+  font-size: 1.2rem;
+  animation: sparkle-float 1.5s ease-in-out infinite;
+  color: #f1c40f;
+}
+.s0 { top: 10%; left: 5%; animation-delay: 0s; }
+.s1 { top: 5%; right: 10%; animation-delay: 0.3s; }
+.s2 { top: 40%; left: -5%; animation-delay: 0.6s; }
+.s3 { top: 35%; right: -5%; animation-delay: 0.9s; }
+.s4 { bottom: 15%; left: 10%; animation-delay: 0.4s; }
+.s5 { bottom: 10%; right: 5%; animation-delay: 0.7s; }
+
+@keyframes sparkle-float {
+  0%, 100% { transform: scale(0.5) rotate(0deg); opacity: 0.3; }
+  50% { transform: scale(1.2) rotate(180deg); opacity: 1; }
+}
+
+.gotcha-text {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--primary);
+  animation: gotcha-pop 0.5s ease-out;
+  margin-bottom: 0.5rem;
+}
+
+@keyframes gotcha-pop {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.3); }
+  100% { transform: scale(1); opacity: 1; }
+}
 
 .shiny-label {
   color: #ffd700;
@@ -568,17 +651,6 @@
 
 .creature-flee { margin: 1rem 0; opacity: 0.5; }
 .try-again-msg { color: var(--text-dim); font-size: 0.9rem; }
-
-.victory-dance {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin: 0.5rem 0;
-}
-
-.dance-star { font-size: 1.5rem; animation: star-dance 1s ease infinite; }
-.dance-star.delay1 { animation-delay: 0.2s; }
-.dance-star.delay2 { animation-delay: 0.4s; }
 
 @keyframes star-dance {
   0%, 100% { transform: translateY(0) rotate(0deg); }
