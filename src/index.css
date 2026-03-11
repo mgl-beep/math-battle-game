@@ -1,0 +1,329 @@
+/* ===== Base / Default Theme (Midnight) ===== */
+:root,
+[data-theme="default"] {
+  --bg: #1a1025;
+  --bg-card: #231735;
+  --bg-elevated: #2d1f42;
+  --text: #f0e8ff;
+  --text-dim: #9988bb;
+  --border: #3a2855;
+  --primary: #9b59b6;
+  --card-radius: 12px;
+  --card-shadow: none;
+  --card-border-width: 2px;
+  --card-border-style: solid;
+
+  font-family: 'Trebuchet MS', 'Segoe UI', system-ui, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--text);
+  background-color: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== Theme 1: Candy Pop ===== */
+[data-theme="candy"] {
+  --bg: #FFF0F5;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #FFF5F8;
+  --text: #5C1A3A;
+  --text-dim: #B05080;
+  --border: #FFB6D3;
+  --primary: #FF69B4;
+  --card-radius: 20px;
+  --card-shadow: 0 4px 0 #FFD0E5;
+  --card-border-width: 3px;
+  --card-border-style: solid;
+}
+
+/* ===== Theme 2: Pastel Dream ===== */
+[data-theme="pastel"] {
+  --bg: #F3EEFF;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #F8F4FF;
+  --text: #4A3A6B;
+  --text-dim: #9B8BBB;
+  --border: #E0D4F5;
+  --primary: #B39DDB;
+  --card-radius: 16px;
+  --card-shadow: 0 2px 12px rgba(179, 157, 219, 0.15);
+  --card-border-width: 1px;
+  --card-border-style: solid;
+}
+
+/* ===== Theme 3: Retro Arcade ===== */
+[data-theme="retro"] {
+  --bg: #0A0A0A;
+  --bg-card: #111111;
+  --bg-elevated: #1A1A1A;
+  --text: #00FF88;
+  --text-dim: #009955;
+  --border: #00FF8833;
+  --primary: #00FF88;
+  --card-radius: 4px;
+  --card-shadow: 0 0 8px #00FF8822, inset 0 0 20px rgba(0, 255, 136, 0.03);
+  --card-border-width: 2px;
+  --card-border-style: solid;
+}
+[data-theme="retro"] { font-family: 'Courier New', 'Lucida Console', monospace; }
+
+/* ===== Theme 4: Storybook ===== */
+[data-theme="storybook"] {
+  --bg: #FDF6E3;
+  --bg-card: #FFFDF5;
+  --bg-elevated: #FFF9EC;
+  --text: #5C4A32;
+  --text-dim: #A08060;
+  --border: #E8D5B5;
+  --primary: #D4944A;
+  --card-radius: 8px;
+  --card-shadow: 2px 3px 0 #E8D5B5;
+  --card-border-width: 2px;
+  --card-border-style: solid;
+}
+[data-theme="storybook"] { font-family: Georgia, 'Palatino Linotype', 'Book Antiqua', serif; }
+
+/* ===== Theme 5: Ocean Breeze ===== */
+[data-theme="ocean"] {
+  --bg: #E0F7FA;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #F0FEFF;
+  --text: #004D61;
+  --text-dim: #5096A8;
+  --border: #B2EBF2;
+  --primary: #00ACC1;
+  --card-radius: 16px;
+  --card-shadow: 0 3px 10px rgba(0, 172, 193, 0.1);
+  --card-border-width: 2px;
+  --card-border-style: solid;
+}
+
+/* ===== Theme 6: Enchanted Forest ===== */
+[data-theme="forest"] {
+  --bg: #0D2818;
+  --bg-card: #132E1C;
+  --bg-elevated: #1B3B24;
+  --text: #C8E6C9;
+  --text-dim: #6B9B6F;
+  --border: #2E5C35;
+  --primary: #66BB6A;
+  --card-radius: 12px;
+  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --card-border-width: 2px;
+  --card-border-style: solid;
+}
+
+/* ===== Theme 7: Sunset Glow ===== */
+[data-theme="sunset"] {
+  --bg: #FFF3E0;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #FFF8F0;
+  --text: #5D2E00;
+  --text-dim: #C07840;
+  --border: #FFD0A0;
+  --primary: #FF7043;
+  --card-radius: 14px;
+  --card-shadow: 0 3px 0 #FFE0C0;
+  --card-border-width: 2px;
+  --card-border-style: solid;
+}
+
+/* ===== Theme 8: Galaxy Sparkle ===== */
+[data-theme="galaxy"] {
+  --bg: #0D0221;
+  --bg-card: #150538;
+  --bg-elevated: #1C0A4A;
+  --text: #E8D5FF;
+  --text-dim: #9B7BCC;
+  --border: #3B1F7A;
+  --primary: #BB86FC;
+  --card-radius: 12px;
+  --card-shadow: 0 0 15px rgba(187, 134, 252, 0.1);
+  --card-border-width: 1px;
+  --card-border-style: solid;
+}
+
+/* ===== Theme 9: Crayon Box ===== */
+[data-theme="crayon"] {
+  --bg: #FFFFFF;
+  --bg-card: #FFFEF8;
+  --bg-elevated: #FFF8E8;
+  --text: #333333;
+  --text-dim: #888888;
+  --border: #333333;
+  --primary: #FF5252;
+  --card-radius: 8px;
+  --card-shadow: 3px 3px 0 #333333;
+  --card-border-width: 3px;
+  --card-border-style: solid;
+}
+[data-theme="crayon"] { font-family: 'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', cursive; }
+
+/* ===== Theme 10: Sakura Garden ===== */
+[data-theme="sakura"] {
+  --bg: #FFF0F3;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #FFF5F7;
+  --text: #6B2040;
+  --text-dim: #C06080;
+  --border: #FFD0DD;
+  --primary: #F06292;
+  --card-radius: 18px;
+  --card-shadow: 0 2px 10px rgba(240, 98, 146, 0.1);
+  --card-border-width: 1px;
+  --card-border-style: solid;
+}
+[data-theme="sakura"] { font-family: 'Segoe UI', 'Helvetica Neue', sans-serif; }
+
+/* ===== Global Resets ===== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.4s, color 0.3s;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  margin: 0 0 0.5em;
+  line-height: 1.2;
+}
+
+p {
+  margin: 0 0 0.75em;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* ===== Theme Switcher ===== */
+.theme-toggle-btn {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 999;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: 50px;
+  padding: 8px 14px;
+  font-size: 1.1rem;
+  color: var(--text);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  transition: transform 0.15s, background 0.3s;
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.05);
+}
+
+.theme-panel-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+
+.theme-panel {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 1.5rem;
+  max-width: 360px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  animation: popIn 0.3s ease;
+}
+
+.theme-panel-title {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
+
+.theme-panel-subtitle {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.theme-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.theme-option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  text-align: left;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+  color: var(--text);
+  font-size: 0.9rem;
+  transition: background 0.15s;
+}
+
+.theme-option:hover {
+  background: var(--bg-card);
+  border-color: var(--primary);
+}
+
+.theme-option.active {
+  border-color: var(--primary);
+  background: var(--bg-card);
+}
+
+.theme-emoji {
+  font-size: 1.3rem;
+}
+
+.theme-name {
+  flex: 1;
+  font-weight: 600;
+}
+
+.theme-check {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
