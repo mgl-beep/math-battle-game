@@ -181,12 +181,9 @@ export default function BattleScreen({ level, operation = 'multiply', playerName
                   {shiny && <div className="shiny-label">★ SHINY ★</div>}
                 </div>
                 <div className="victory-sparkles">
-                  <span className="sparkle s0">★</span>
-                  <span className="sparkle s1">✦</span>
-                  <span className="sparkle s2">★</span>
-                  <span className="sparkle s3">✦</span>
-                  <span className="sparkle s4">★</span>
-                  <span className="sparkle s5">✦</span>
+                  {[...Array(6)].map((_, i) => (
+                    <span key={i} className={`px-star s${i}`} />
+                  ))}
                 </div>
               </div>
               <p className="gotcha-text">Gotcha!</p>

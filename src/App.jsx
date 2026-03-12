@@ -11,6 +11,7 @@ import Collection from './components/Collection';
 import Shop from './components/Shop';
 import BadgeWall from './components/BadgeWall';
 import ThemeSwitcher from './components/ThemeSwitcher';
+import CelebrationPreview from './components/CelebrationPreview';
 import './App.css';
 
 export default function App() {
@@ -214,6 +215,10 @@ export default function App() {
           onEquip={game.equipItem}
           onBack={() => navigate('home')}
         />
+      )}
+
+      {screen === 'celebrations' && (
+        <CelebrationPreview onBack={() => navigate('home')} />
       )}
 
       {screen === 'badges' && (

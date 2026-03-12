@@ -97,6 +97,12 @@ export default function HomeScreen({ gameState, onNavigate, onSwitchPlayer }) {
           <span className="menu-label">Badges</span>
           <span className="menu-desc">{badges.length} earned</span>
         </button>
+
+        <button className="menu-btn" onClick={() => onNavigate('celebrations')} style={{ borderColor: '#9b59b6' }}>
+          <span className="menu-icon">🎉</span>
+          <span className="menu-label">Celebrations</span>
+          <span className="menu-desc">Preview animations</span>
+        </button>
       </div>
 
       <button className="switch-player-btn" onClick={onSwitchPlayer}>
