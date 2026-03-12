@@ -2,6 +2,8 @@ import { useState, useCallback } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { useGameState } from './hooks/useGameState';
 import { checkBadges, badgeDefinitions } from './data/badges';
+import { creatureData, creatureOrder, getEvolutionStage, getCreaturePalette, getCreatureDisplayName } from './data/creatures';
+import PixelCreature from './components/PixelCreature';
 import HomeScreen from './components/HomeScreen';
 import LevelSelect from './components/LevelSelect';
 import BattleScreen from './components/BattleScreen';
@@ -16,6 +18,7 @@ export default function App() {
   const [battleLevel, setBattleLevel] = useState(null);
   const [battleOperation, setBattleOperation] = useState('multiply');
   const [newBadges, setNewBadges] = useState([]);
+  const [evolution, setEvolution] = useState(null); // { creatureId, oldStage, newStage }
   const game = useGameState();
 
   const navigate = useCallback((dest) => {
@@ -30,6 +33,10 @@ export default function App() {
   };
 
   const handleBattleComplete = (result) => {
+    // Check evolution stage BEFORE updating state
+    const creatureId = creatureOrder[battleLevel - 1];
+    const oldStage = getEvolutionStage(creatureId, game.state);
+
     game.addCoins(result.coinsEarned);
     game.recordBattle(result.won, result.perfect, result.maxSpeedStreak);
 
@@ -40,7 +47,15 @@ export default function App() {
     // Track per-level wins/perfects for evolution
     game.recordLevelBattle(battleLevel, result.won, result.perfect);
 
-    const currentState = {
+    // Build the state as it will be AFTER updates to check new evolution
+    const updatedLevelStats = { ...game.state.levelStats };
+    const ls = updatedLevelStats[battleLevel] || { wins: 0, perfects: 0 };
+    updatedLevelStats[battleLevel] = {
+      wins: ls.wins + (result.won ? 1 : 0),
+      perfects: ls.perfects + (result.perfect ? 1 : 0),
+    };
+
+    const afterState = {
       ...game.state,
       coins: game.state.coins + result.coinsEarned,
       caughtCreatures: result.won && !game.state.caughtCreatures.includes(result.creatureId)
@@ -53,9 +68,12 @@ export default function App() {
       perfectRounds: game.state.perfectRounds + (result.perfect ? 1 : 0),
       winStreak: result.won ? game.state.winStreak + 1 : 0,
       speedStreak: Math.max(game.state.speedStreak, result.maxSpeedStreak || 0),
+      levelStats: updatedLevelStats,
     };
 
-    const earnedBadges = checkBadges(currentState);
+    const newStage = getEvolutionStage(creatureId, afterState);
+
+    const earnedBadges = checkBadges(afterState);
     const brandNew = earnedBadges.filter(b => !game.state.badges.includes(b));
 
     brandNew.forEach(badgeId => game.addBadge(badgeId));
@@ -63,7 +81,13 @@ export default function App() {
       setNewBadges(brandNew);
     }
 
-    setScreen('home');
+    // Show evolution screen if stage changed
+    if (newStage > oldStage && newStage >= 2) {
+      setEvolution({ creatureId, oldStage, newStage });
+      setScreen('evolution');
+    } else {
+      setScreen('home');
+    }
   };
 
   const handleBuy = (item) => {
@@ -123,6 +147,39 @@ export default function App() {
           onBack={() => navigate('home')}
         />
       )}
+
+      {screen === 'evolution' && evolution && (() => {
+        const creature = creatureData[evolution.creatureId];
+        const oldPalette = getCreaturePalette(creature, evolution.oldStage);
+        const newPalette = getCreaturePalette(creature, evolution.newStage);
+        const oldName = getCreatureDisplayName(creature, evolution.oldStage);
+        const newName = getCreatureDisplayName(creature, evolution.newStage);
+        const isUltimate = evolution.newStage >= 3;
+        return (
+          <div className="evolution-screen" onClick={() => { setEvolution(null); setScreen('home'); }}>
+            <div className="evo-celebration">
+              <h2 className="evo-title">{isUltimate ? 'Ultimate Evolution!' : 'Your creature evolved!'}</h2>
+              <div className="evo-transform">
+                <div className="evo-old">
+                  <PixelCreature pixels={creature.pixels} palette={oldPalette} size={4} />
+                  <span className="evo-stage-label">{oldName}</span>
+                </div>
+                <div className="evo-arrow">→</div>
+                <div className={`evo-new ${isUltimate ? 'glow-ultimate' : 'glow-evolved'}`}>
+                  <PixelCreature pixels={creature.pixels} palette={newPalette} size={6} />
+                  <span className="evo-stage-label">{newName}</span>
+                </div>
+              </div>
+              <div className="evo-sparkle-ring">
+                {[...Array(8)].map((_, i) => (
+                  <span key={i} className={`evo-ring-star rs${i}`}>{isUltimate ? '★' : '✦'}</span>
+                ))}
+              </div>
+              <p className="evo-tap-hint">Tap to continue</p>
+            </div>
+          </div>
+        );
+      })()}
 
       {newBadges.length > 0 && (
         <div className="badge-notification" onClick={() => setNewBadges([])}>

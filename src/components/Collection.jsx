@@ -35,11 +35,16 @@ export default function Collection({ gameState, onBack }) {
                 </span>
                 <span className="coll-list-type">×{creature.level}</span>
                 {caught && (
-                  <div className="coll-list-evo-bar">
-                    <div className="evo-bar-track">
-                      <div className={`evo-bar-fill stage-${stage}`} style={{ width: `${(stage / 3) * 100}%` }} />
+                  <>
+                    <div className="coll-list-evo-bar">
+                      <div className="evo-bar-track">
+                        <div className={`evo-bar-fill stage-${stage}`} style={{ width: `${(stage / 3) * 100}%` }} />
+                      </div>
                     </div>
-                  </div>
+                    <span className="evo-hint">
+                      {stage === 0 ? 'Catch it!' : stage === 1 ? 'Win 3 battles to evolve!' : stage === 2 ? '2 perfect rounds for ultimate!' : '★ Fully evolved!'}
+                    </span>
+                  </>
                 )}
               </div>
             </div>
