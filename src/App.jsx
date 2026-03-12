@@ -2,7 +2,7 @@ import { useState, useCallback, useRef } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { useGameState } from './hooks/useGameState';
 import { checkBadges, badgeDefinitions } from './data/badges';
-import { creatureData, creatureOrder, getEvolutionStage, getCreaturePalette, getCreatureDisplayName } from './data/creatures';
+import { creatureData, creatureOrder, starterCreature, getEvolutionStage, getCreaturePalette, getCreatureDisplayName } from './data/creatures';
 import PixelCreature from './components/PixelCreature';
 import HomeScreen from './components/HomeScreen';
 import LevelSelect from './components/LevelSelect';
@@ -119,8 +119,8 @@ export default function App() {
             <div className="name-entry-creature">
               <div className="creature-bounce">
                 <PixelCreature
-                  pixels={creatureData[creatureOrder[0]].pixels}
-                  palette={creatureData[creatureOrder[0]].palette}
+                  pixels={starterCreature.pixels}
+                  palette={starterCreature.palette}
                   size={5}
                 />
               </div>
