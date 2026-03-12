@@ -56,7 +56,7 @@ export default function BattleScreen({ level, operation = 'multiply', playerName
       setCreatureHp(prev => Math.max(0, prev - damage));
       setFlash('correct');
       setCelebration(celebrationTypes[Math.floor(Math.random() * 3)]);
-      setTimeout(() => setCelebration(null), 900);
+      setTimeout(() => setCelebration(null), 1500);
 
       const newStreak = elapsed < 2 ? speedStreak + 1 : 0;
       setSpeedStreak(newStreak);
@@ -294,7 +294,9 @@ export default function BattleScreen({ level, operation = 'multiply', playerName
       {/* Correct answer celebrations */}
       {celebration === 'rainbow' && (
         <div className="celeb-overlay celeb-rainbow">
-          <div className="rainbow-arc" />
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className={`mini-rainbow mr${i}`} />
+          ))}
         </div>
       )}
       {celebration === 'sparkles' && (
