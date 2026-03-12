@@ -300,7 +300,6 @@
   transform: translateX(-50%);
   font-size: 2rem;
   z-index: 2;
-  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3));
 }
 
 .equipped-hat.pixel-hat {
