@@ -642,6 +642,116 @@
   100% { transform: scale(1); filter: brightness(1); }
 }
 
+/* ===== Correct Answer Celebrations ===== */
+.celeb-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 50;
+  overflow: hidden;
+}
+
+/* --- Rainbow Arc --- */
+.rainbow-arc {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250px;
+  height: 125px;
+  transform: translate(-50%, -50%);
+  border-radius: 250px 250px 0 0;
+  background:
+    conic-gradient(from 180deg at 50% 100%,
+      #e74c3c 0deg, #e74c3c 25deg,
+      #f39c12 25deg, #f39c12 50deg,
+      #f1c40f 50deg, #f1c40f 75deg,
+      #2ecc71 75deg, #2ecc71 100deg,
+      #3498db 100deg, #3498db 125deg,
+      #9b59b6 125deg, #9b59b6 150deg,
+      #e91e63 150deg, #e91e63 180deg
+    );
+  animation: rainbow-pop 0.8s ease-out forwards;
+  image-rendering: pixelated;
+}
+
+.rainbow-arc::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 90px;
+  background: var(--bg);
+  border-radius: 180px 180px 0 0;
+}
+
+@keyframes rainbow-pop {
+  0% { transform: translate(-50%, -50%) scale(0) rotate(-20deg); opacity: 0; }
+  30% { transform: translate(-50%, -50%) scale(1.2) rotate(5deg); opacity: 1; }
+  50% { transform: translate(-50%, -50%) scale(1) rotate(-3deg); opacity: 1; }
+  70% { transform: translate(-50%, -50%) scale(1.05) rotate(2deg); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(1.3) rotate(0deg); opacity: 0; }
+}
+
+/* --- Pixel Sparkles --- */
+.pixel-sparkle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 1.4rem;
+  animation: sparkle-burst 0.8s ease-out forwards;
+}
+
+.ps0 { color: #f1c40f; --sx: -80px; --sy: -90px; animation-delay: 0s; }
+.ps1 { color: #e74c3c; --sx: 70px; --sy: -80px; animation-delay: 0.03s; }
+.ps2 { color: #3498db; --sx: -50px; --sy: -110px; animation-delay: 0.06s; }
+.ps3 { color: #2ecc71; --sx: 90px; --sy: -40px; animation-delay: 0.09s; }
+.ps4 { color: #9b59b6; --sx: -90px; --sy: -30px; animation-delay: 0.04s; }
+.ps5 { color: #f39c12; --sx: 40px; --sy: -120px; animation-delay: 0.07s; }
+.ps6 { color: #e91e63; --sx: -70px; --sy: -60px; animation-delay: 0.02s; }
+.ps7 { color: #1abc9c; --sx: 60px; --sy: -100px; animation-delay: 0.08s; }
+.ps8 { color: #f1c40f; --sx: -30px; --sy: -130px; animation-delay: 0.05s; }
+.ps9 { color: #e74c3c; --sx: 100px; --sy: -70px; animation-delay: 0.01s; }
+
+@keyframes sparkle-burst {
+  0% { transform: translate(0, 0) scale(0) rotate(0deg); opacity: 1; }
+  30% { transform: translate(calc(var(--sx) * 0.5), calc(var(--sy) * 0.5)) scale(1.5) rotate(180deg); opacity: 1; }
+  100% { transform: translate(var(--sx), var(--sy)) scale(0.3) rotate(360deg); opacity: 0; }
+}
+
+/* --- Pixel Confetti --- */
+.pixel-confetti {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  top: -10px;
+  animation: confetti-fall 0.85s ease-in forwards;
+  image-rendering: pixelated;
+}
+
+.pc0  { left: 8%;  background: #e74c3c; --cr: 280deg; animation-delay: 0s; }
+.pc1  { left: 15%; background: #f39c12; --cr: -200deg; animation-delay: 0.05s; }
+.pc2  { left: 22%; background: #2ecc71; --cr: 320deg; animation-delay: 0.02s; }
+.pc3  { left: 30%; background: #3498db; --cr: -250deg; animation-delay: 0.08s; }
+.pc4  { left: 38%; background: #9b59b6; --cr: 200deg; animation-delay: 0.03s; }
+.pc5  { left: 45%; background: #f1c40f; --cr: -300deg; animation-delay: 0.06s; }
+.pc6  { left: 52%; background: #e91e63; --cr: 260deg; animation-delay: 0.01s; }
+.pc7  { left: 60%; background: #1abc9c; --cr: -220deg; animation-delay: 0.07s; }
+.pc8  { left: 68%; background: #e74c3c; --cr: 310deg; animation-delay: 0.04s; width: 6px; height: 6px; }
+.pc9  { left: 75%; background: #f39c12; --cr: -270deg; animation-delay: 0.09s; width: 10px; height: 10px; }
+.pc10 { left: 82%; background: #3498db; --cr: 240deg; animation-delay: 0.02s; }
+.pc11 { left: 90%; background: #2ecc71; --cr: -290deg; animation-delay: 0.06s; }
+.pc12 { left: 5%;  background: #9b59b6; --cr: 300deg; animation-delay: 0.04s; width: 10px; height: 10px; }
+.pc13 { left: 48%; background: #f1c40f; --cr: -240deg; animation-delay: 0.01s; width: 6px; height: 6px; }
+.pc14 { left: 35%; background: #e91e63; --cr: 270deg; animation-delay: 0.07s; }
+.pc15 { left: 65%; background: #1abc9c; --cr: -260deg; animation-delay: 0.03s; }
+
+@keyframes confetti-fall {
+  0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+  100% { transform: translateY(calc(100vh + 20px)) rotate(var(--cr)) scale(0.6); opacity: 0.7; }
+}
+
 .battle-question-area {
   padding: 1.5rem 1.25rem 2rem;
   background: var(--bg-card);

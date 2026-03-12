@@ -18,7 +18,9 @@ export default function BattleScreen({ level, operation = 'multiply', playerName
   const [speedStreak, setSpeedStreak] = useState(0);
   const [maxSpeedStreak, setMaxSpeedStreak] = useState(0);
   const [creatureHp, setCreatureHp] = useState(100);
+  const [celebration, setCelebration] = useState(null); // 'rainbow' | 'sparkles' | 'confetti'
   const inputRef = useRef(null);
+  const celebrationTypes = ['rainbow', 'sparkles', 'confetti'];
 
   const creatureId = creatureOrder[level - 1];
   const creature = creatureData[creatureId];
@@ -53,6 +55,8 @@ export default function BattleScreen({ level, operation = 'multiply', playerName
 
       setCreatureHp(prev => Math.max(0, prev - damage));
       setFlash('correct');
+      setCelebration(celebrationTypes[Math.floor(Math.random() * 3)]);
+      setTimeout(() => setCelebration(null), 900);
 
       const newStreak = elapsed < 2 ? speedStreak + 1 : 0;
       setSpeedStreak(newStreak);
@@ -286,6 +290,27 @@ export default function BattleScreen({ level, operation = 'multiply', playerName
           />
         </div>
       </div>
+
+      {/* Correct answer celebrations */}
+      {celebration === 'rainbow' && (
+        <div className="celeb-overlay celeb-rainbow">
+          <div className="rainbow-arc" />
+        </div>
+      )}
+      {celebration === 'sparkles' && (
+        <div className="celeb-overlay celeb-sparkles">
+          {[...Array(10)].map((_, i) => (
+            <span key={i} className={`pixel-sparkle ps${i}`}>✦</span>
+          ))}
+        </div>
+      )}
+      {celebration === 'confetti' && (
+        <div className="celeb-overlay celeb-confetti">
+          {[...Array(16)].map((_, i) => (
+            <span key={i} className={`pixel-confetti pc${i}`} />
+          ))}
+        </div>
+      )}
 
       <div className="battle-question-area">
         <div className="question-display">
