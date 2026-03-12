@@ -33,6 +33,7 @@ export default function Shop({ gameState, onBuy, onEquip, onBack }) {
   const [activeCategory, setActiveCategory] = useState('hat');
   const [previewHat, setPreviewHat] = useState(null);
   const [previewAcc, setPreviewAcc] = useState(null);
+  const [previewBg, setPreviewBg] = useState(null);
   const { coins, ownedItems, equippedItems } = gameState;
 
   const filteredItems = shopItems.filter(item => item.category === activeCategory);
@@ -40,9 +41,17 @@ export default function Shop({ gameState, onBuy, onEquip, onBack }) {
   const equippedHat = shopItems.find(i => i.id === equippedItems.hat);
   const equippedAcc = shopItems.find(i => i.id === equippedItems.accessory);
 
-  // Show preview hat/acc if set, otherwise show equipped
+  // Show preview hat/acc/bg if set, otherwise show equipped
   const displayHat = previewHat !== null ? shopItems.find(i => i.id === previewHat) : equippedHat;
   const displayAcc = previewAcc !== null ? shopItems.find(i => i.id === previewAcc) : equippedAcc;
+  const displayBgId = previewBg !== null ? previewBg : equippedItems.background;
+
+  const bgColors = {
+    bg_meadow: 'linear-gradient(180deg, #87CEEB 0%, #90EE90 100%)',
+    bg_space: 'linear-gradient(180deg, #0a0a2e 0%, #1a1a4e 50%, #2c2c6c 100%)',
+    bg_beach: 'linear-gradient(180deg, #87CEEB 0%, #f4d03f 60%, #5dade2 100%)',
+    bg_rainbow: 'linear-gradient(135deg, #ff6b6b 0%, #ffa94d 15%, #ffd43b 30%, #69db7c 45%, #4dabf7 60%, #7950f2 75%, #cc5de8 90%)',
+  };
 
   return (
     <div className="shop-screen">
@@ -57,7 +66,7 @@ export default function Shop({ gameState, onBuy, onEquip, onBack }) {
 
       {/* Preview */}
       <div className="shop-preview">
-        <div className="creature-showcase" style={{ width: 200, height: 220, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="creature-showcase" style={{ width: 200, height: 220, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', background: displayBgId ? bgColors[displayBgId] : 'transparent', borderRadius: '1rem', transition: 'background 0.3s' }}>
           {displayHat && <PixelOverlay itemId={displayHat.id} className={`equipped-hat pixel-hat ${displayHat.id}`} />}
           <PixelCreature
             pixels={starterCreature.pixels}
@@ -75,7 +84,7 @@ export default function Shop({ gameState, onBuy, onEquip, onBack }) {
           <button
             key={cat}
             className={`shop-tab ${activeCategory === cat ? 'active' : ''}`}
-            onClick={() => { setActiveCategory(cat); setPreviewHat(null); setPreviewAcc(null); }}
+            onClick={() => { setActiveCategory(cat); setPreviewHat(null); setPreviewAcc(null); setPreviewBg(null); }}
           >
             {categoryLabels[cat]}
           </button>
@@ -90,13 +99,16 @@ export default function Shop({ gameState, onBuy, onEquip, onBack }) {
           const canAfford = coins >= item.price;
 
           const isPreviewing = (item.category === 'hat' && previewHat === item.id) ||
-            (item.category === 'accessory' && previewAcc === item.id);
+            (item.category === 'accessory' && previewAcc === item.id) ||
+            (item.category === 'background' && previewBg === item.id);
 
           const handlePreview = () => {
             if (item.category === 'hat') {
               setPreviewHat(previewHat === item.id ? null : item.id);
             } else if (item.category === 'accessory') {
               setPreviewAcc(previewAcc === item.id ? null : item.id);
+            } else if (item.category === 'background') {
+              setPreviewBg(previewBg === item.id ? null : item.id);
             }
           };
 
