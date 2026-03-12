@@ -66,7 +66,7 @@ export default function Shop({ gameState, onBuy, onEquip, onBack }) {
 
       {/* Preview */}
       <div className="shop-preview">
-        <div className="creature-showcase" style={{ width: 200, height: 220, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', background: displayBgId ? bgColors[displayBgId] : 'transparent', borderRadius: '1rem', transition: 'background 0.3s' }}>
+        <div className="creature-showcase" style={{ width: 200, height: 220, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', background: displayBgId ? bgColors[displayBgId] : 'transparent', borderRadius: '1rem', transition: 'background 0.3s' }}>
           {displayHat && <PixelOverlay itemId={displayHat.id} className={`equipped-hat pixel-hat ${displayHat.id}`} />}
           <PixelCreature
             pixels={starterCreature.pixels}
