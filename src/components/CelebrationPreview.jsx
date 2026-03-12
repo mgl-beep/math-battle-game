@@ -25,10 +25,26 @@ export default function CelebrationPreview({ onBack }) {
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', maxWidth: 400, margin: '0 auto' }}>
 
-        <h3 style={{ margin: '0.5rem 0 0', color: 'var(--text-dim)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Confetti</h3>
+        <h3 style={{ margin: '0.5rem 0 0', color: 'var(--text-dim)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Pixel Rain Styles</h3>
         <button className="start-btn" style={{ background: '#9b59b6', width: '100%' }}
-          onClick={() => trigger('confetti-rain')}>
-          Pixel Rain
+          onClick={() => trigger('rain-fast')}>
+          A) Fast Tiny Rain
+        </button>
+        <button className="start-btn" style={{ background: '#3498db', width: '100%' }}
+          onClick={() => trigger('rain-gentle')}>
+          B) Gentle Shower
+        </button>
+        <button className="start-btn" style={{ background: '#e74c3c', width: '100%' }}
+          onClick={() => trigger('rain-heavy')}>
+          C) Heavy Downpour
+        </button>
+        <button className="start-btn" style={{ background: '#2ecc71', width: '100%' }}
+          onClick={() => trigger('rain-sparkle')}>
+          D) Sparkle Rain
+        </button>
+        <button className="start-btn" style={{ background: '#f39c12', color: '#333', width: '100%' }}
+          onClick={() => trigger('rain-wave')}>
+          E) Wave Rain
         </button>
 
         <h3 style={{ margin: '0.5rem 0 0', color: 'var(--text-dim)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Rainbows</h3>
@@ -36,31 +52,131 @@ export default function CelebrationPreview({ onBack }) {
           onClick={() => trigger('rainbow-arcs')}>
           Pixel Arcs
         </button>
+
         <h3 style={{ margin: '0.5rem 0 0', color: 'var(--text-dim)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Sparkles</h3>
         <button className="start-btn" style={{ background: '#f1c40f', color: '#333', width: '100%' }}
           onClick={() => trigger('sparkle-cross')}>
-          A) Pixel Cross Stars
+          Pixel Cross Stars
         </button>
-        <button className="start-btn" style={{ background: '#e74c3c', width: '100%' }}
+        <button className="start-btn" style={{ background: '#e91e63', width: '100%' }}
           onClick={() => trigger('sparkle-twinkle')}>
-          B) Twinkle Scatter
+          Twinkle Scatter
         </button>
         <button className="start-btn" style={{ background: '#3498db', width: '100%' }}
           onClick={() => trigger('sparkle-rise')}>
-          C) Rising Bubbles
+          Rising Bubbles
         </button>
         <button className="start-btn" style={{ background: '#2ecc71', width: '100%' }}
           onClick={() => trigger('sparkle-firework')}>
-          D) Pixel Fireworks
+          Pixel Fireworks
         </button>
       </div>
 
-      {/* === Confetti: Pixel Rain === */}
-      {active === 'confetti-rain' && (
-        <div key={`cr-${key}`} className="celeb-overlay celeb-confetti">
-          {[...Array(16)].map((_, i) => (
-            <span key={i} className={`pixel-confetti pc${i}`} />
+      {/* === Rain A: Fast tiny — straight down, quick, lots of dots === */}
+      {active === 'rain-fast' && (
+        <div key={`ra-${key}`} className="celeb-overlay">
+          {[...Array(30)].map((_, i) => (
+            <span key={i} className={`pixel-rain-dot prd${i}`} />
           ))}
+        </div>
+      )}
+
+      {/* === Rain B: Gentle shower — slower, slight drift, mixed sizes === */}
+      {active === 'rain-gentle' && (
+        <div key={`rb-${key}`} className="celeb-overlay">
+          {[...Array(20)].map((_, i) => {
+            const sizes = [4,6,3,5,7,4,6,3,5,4,7,3,6,5,4,3,6,5,7,4];
+            const lefts = [3,10,18,24,31,38,44,51,57,63,69,75,81,87,93,7,15,22,35,48];
+            const durs = [1.8,2.2,1.6,2.0,2.4,1.7,2.1,1.9,2.3,1.8,2.0,1.6,2.2,1.9,2.1,1.7,2.3,2.0,1.8,2.4];
+            const delays = [0,0.1,0.2,0.05,0.15,0.25,0.08,0.18,0.12,0.22,0.3,0.02,0.14,0.24,0.06,0.16,0.28,0.04,0.2,0.1];
+            const drifts = [8,-10,12,-6,10,-8,14,-12,6,-10,8,-14,10,-6,12,-8,6,-12,10,-8];
+            return (
+              <span key={i} style={{
+                position: 'absolute',
+                width: sizes[i], height: sizes[i],
+                background: COLORS[i % COLORS.length],
+                imageRendering: 'pixelated',
+                borderRadius: 0,
+                left: `${lefts[i]}%`,
+                top: -10,
+                animation: `rain-gentle-fall ${durs[i]}s ease-in forwards`,
+                animationDelay: `${delays[i]}s`,
+                '--drift': `${drifts[i]}px`,
+              }} />
+            );
+          })}
+        </div>
+      )}
+
+      {/* === Rain C: Heavy downpour — dense, fast, streaky === */}
+      {active === 'rain-heavy' && (
+        <div key={`rc-${key}`} className="celeb-overlay">
+          {[...Array(40)].map((_, i) => {
+            const lefts = [2,5,8,11,14,17,20,23,26,29,32,35,38,41,44,47,50,53,56,59,62,65,68,71,74,77,80,83,86,89,92,95,4,13,22,31,40,49,58,67];
+            const durs = [0.4,0.5,0.35,0.45,0.55,0.4,0.5,0.35,0.45,0.3,0.5,0.4,0.55,0.35,0.45,0.5,0.4,0.35,0.5,0.45,0.4,0.55,0.35,0.45,0.5,0.4,0.35,0.55,0.45,0.5,0.4,0.35,0.5,0.45,0.4,0.55,0.35,0.45,0.5,0.4];
+            const delays = [0,0.05,0.1,0.02,0.08,0.12,0.03,0.15,0.06,0.18,0.01,0.09,0.14,0.04,0.11,0.07,0.16,0.02,0.13,0.08,0.19,0.05,0.1,0.15,0.03,0.12,0.07,0.17,0.04,0.14,0.09,0.06,0.2,0.11,0.16,0.01,0.13,0.08,0.18,0.05];
+            return (
+              <span key={i} style={{
+                position: 'absolute',
+                width: 3, height: 8,
+                background: COLORS[i % COLORS.length],
+                imageRendering: 'pixelated',
+                borderRadius: 0,
+                left: `${lefts[i % lefts.length]}%`,
+                top: -12,
+                opacity: 0.9,
+                animation: `confetti-rain ${durs[i % durs.length]}s linear forwards`,
+                animationDelay: `${delays[i % delays.length]}s`,
+              }} />
+            );
+          })}
+        </div>
+      )}
+
+      {/* === Rain D: Sparkle rain — dots that twinkle as they fall === */}
+      {active === 'rain-sparkle' && (
+        <div key={`rd-${key}`} className="celeb-overlay">
+          {[...Array(24)].map((_, i) => {
+            const lefts = [4,12,20,28,36,44,52,60,68,76,84,92,8,16,24,32,40,48,56,64,72,80,88,96];
+            const durs = [1.2,1.5,1.0,1.3,1.6,1.1,1.4,1.2,1.5,1.0,1.3,1.1,1.4,1.6,1.2,1.0,1.5,1.3,1.1,1.4,1.6,1.2,1.0,1.5];
+            const delays = [0,0.08,0.16,0.04,0.12,0.2,0.06,0.14,0.22,0.02,0.1,0.18,0.24,0.05,0.13,0.21,0.07,0.15,0.23,0.03,0.11,0.19,0.01,0.09];
+            return (
+              <span key={i} style={{
+                position: 'absolute',
+                width: 5, height: 5,
+                background: COLORS[i % COLORS.length],
+                imageRendering: 'pixelated',
+                borderRadius: 0,
+                left: `${lefts[i]}%`,
+                top: -10,
+                animation: `rain-sparkle-fall ${durs[i]}s ease-in forwards`,
+                animationDelay: `${delays[i]}s`,
+              }} />
+            );
+          })}
+        </div>
+      )}
+
+      {/* === Rain E: Wave rain — cascading left to right === */}
+      {active === 'rain-wave' && (
+        <div key={`re-${key}`} className="celeb-overlay">
+          {[...Array(24)].map((_, i) => {
+            const col = i % 12;
+            const row = Math.floor(i / 12);
+            return (
+              <span key={i} style={{
+                position: 'absolute',
+                width: 5, height: 5,
+                background: COLORS[i % COLORS.length],
+                imageRendering: 'pixelated',
+                borderRadius: 0,
+                left: `${5 + col * 8}%`,
+                top: -10,
+                animation: `confetti-rain ${0.8 + row * 0.3}s linear forwards`,
+                animationDelay: `${col * 0.06 + row * 0.4}s`,
+              }} />
+            );
+          })}
         </div>
       )}
 
@@ -77,7 +193,7 @@ export default function CelebrationPreview({ onBack }) {
         </div>
       )}
 
-      {/* === Sparkle A: Pixel Cross Stars === */}
+      {/* === Sparkle: Pixel Cross Stars === */}
       {active === 'sparkle-cross' && (
         <div key={`sa-${key}`} className="celeb-overlay celeb-sparkles">
           {[...Array(10)].map((_, i) => (
@@ -86,74 +202,29 @@ export default function CelebrationPreview({ onBack }) {
         </div>
       )}
 
-      {/* === Sparkle B: Twinkle Scatter === */}
+      {/* === Sparkle: Twinkle Scatter === */}
       {active === 'sparkle-twinkle' && (
         <div key={`sb-${key}`} className="celeb-overlay">
           {[...Array(16)].map((_, i) => (
-            <span key={i} style={{
-              position: 'absolute',
-              width: 6, height: 6,
-              background: COLORS[i % COLORS.length],
-              imageRendering: 'pixelated',
-              borderRadius: 0,
-              left: `${5 + (i * 6.2) % 90}%`,
-              top: `${10 + (i * 17.3) % 60}%`,
-              animation: `sparkle-twinkle 0.7s ease-out forwards`,
-              animationDelay: `${i * 0.06}s`,
-            }} />
+            <span key={i} className={`twinkle-dot td${i}`} />
           ))}
         </div>
       )}
 
-      {/* === Sparkle C: Rising Bubbles === */}
+      {/* === Sparkle: Rising Bubbles === */}
       {active === 'sparkle-rise' && (
         <div key={`sc-${key}`} className="celeb-overlay">
-          {[...Array(12)].map((_, i) => {
-            const sizes = [5, 8, 6, 10, 7, 5, 9, 6, 8, 5, 7, 10];
-            return (
-              <span key={i} style={{
-                position: 'absolute',
-                width: sizes[i], height: sizes[i],
-                background: COLORS[i % COLORS.length],
-                imageRendering: 'pixelated',
-                borderRadius: 0,
-                left: `${10 + (i * 7.5)}%`,
-                bottom: -10,
-                animation: `sparkle-rise ${1 + (i % 3) * 0.3}s ease-out forwards`,
-                animationDelay: `${i * 0.08}s`,
-                '--drift': `${((i % 5) - 2) * 15}px`,
-              }} />
-            );
-          })}
+          {[...Array(12)].map((_, i) => (
+            <span key={i} className={`rising-dot rd${i}`} />
+          ))}
         </div>
       )}
 
-      {/* === Sparkle D: Pixel Fireworks === */}
+      {/* === Sparkle: Pixel Fireworks === */}
       {active === 'sparkle-firework' && (
         <div key={`sd-${key}`} className="celeb-overlay">
-          {[
-            { x: '25%', y: '35%', delay: 0 },
-            { x: '70%', y: '25%', delay: 0.2 },
-            { x: '50%', y: '45%', delay: 0.4 },
-          ].map((origin, oi) => (
-            [...Array(8)].map((_, i) => {
-              const angle = (i / 8) * 360;
-              const dists = [55, 70, 45, 65, 50, 75, 60, 55];
-              return (
-                <span key={`${oi}-${i}`} style={{
-                  position: 'absolute',
-                  width: 6, height: 6,
-                  background: COLORS[(oi * 3 + i) % COLORS.length],
-                  imageRendering: 'pixelated',
-                  borderRadius: 0,
-                  left: origin.x, top: origin.y,
-                  animation: `sparkle-firework 0.8s ease-out forwards`,
-                  animationDelay: `${origin.delay + i * 0.02}s`,
-                  '--fx': `${Math.cos(angle * Math.PI / 180) * dists[i]}px`,
-                  '--fy': `${Math.sin(angle * Math.PI / 180) * dists[i]}px`,
-                }} />
-              );
-            })
+          {[...Array(24)].map((_, i) => (
+            <span key={i} className={`fw-dot fw${i}`} />
           ))}
         </div>
       )}

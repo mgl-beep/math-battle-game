@@ -41,7 +41,7 @@ export const pixelAccessories = {
       '22222222222222.',
       '.2222222222222.',
     ],
-    palette: { '1': '#ff69b4', '2': '#4caf50', '3': '#ffeb3b' },
+    palette: { '1': '#ff69b4', '2': '#4caf50', '3': '#ffffff' },
   },
   hat_party: {
     pixels: [

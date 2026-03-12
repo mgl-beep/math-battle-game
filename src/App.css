@@ -297,13 +297,13 @@
 }
 
 .equipped-hat.pixel-hat {
-  width: 70px;
+  width: 150px;
   height: auto;
-  top: -5px;
+  top: 28px;
 }
 
 .equipped-hat.small { font-size: 1.5rem; top: -15px; }
-.equipped-hat.pixel-hat.small { width: 50px; top: -3px; }
+.equipped-hat.pixel-hat.small { width: 120px; top: 22px; }
 
 .equipped-acc {
   position: absolute;
@@ -686,8 +686,8 @@
 /* --- Pixel Stars --- */
 .pixel-star {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 35%;
+  left: 42%;
   width: 6px;
   height: 6px;
   image-rendering: pixelated;
@@ -723,44 +723,161 @@
 /* --- Pixel Confetti --- */
 .pixel-confetti {
   position: absolute;
-  top: -12px;
+  width: 8px;
+  height: 8px;
+  top: -10px;
   border-radius: 0;
   image-rendering: pixelated;
-  animation: confetti-drop var(--dur, 1.8s) cubic-bezier(0.2, 0, 0.8, 1) forwards,
-             confetti-sway var(--sway-dur, 0.6s) ease-in-out infinite alternate;
+  animation: confetti-fall 0.85s ease-in forwards;
 }
 
-/* Varied shapes: wide strips, tall strips, squares */
-.pc0  { left: 6%;  width: 10px; height: 5px; background: #e74c3c; --dur: 1.6s; --sway-dur: 0.5s; --drift: 30px;  animation-delay: 0s; }
-.pc1  { left: 13%; width: 5px;  height: 10px; background: #f39c12; --dur: 2.0s; --sway-dur: 0.7s; --drift: -25px; animation-delay: 0.08s; }
-.pc2  { left: 20%; width: 8px;  height: 8px; background: #2ecc71; --dur: 1.7s; --sway-dur: 0.55s; --drift: 20px;  animation-delay: 0.02s; }
-.pc3  { left: 28%; width: 6px;  height: 12px; background: #3498db; --dur: 2.1s; --sway-dur: 0.65s; --drift: -35px; animation-delay: 0.12s; }
-.pc4  { left: 35%; width: 10px; height: 6px; background: #9b59b6; --dur: 1.5s; --sway-dur: 0.45s; --drift: 28px;  animation-delay: 0.05s; }
-.pc5  { left: 42%; width: 7px;  height: 7px; background: #f1c40f; --dur: 1.9s; --sway-dur: 0.6s;  --drift: -18px; animation-delay: 0.15s; }
-.pc6  { left: 50%; width: 12px; height: 5px; background: #e91e63; --dur: 1.6s; --sway-dur: 0.5s;  --drift: 22px;  animation-delay: 0.03s; }
-.pc7  { left: 57%; width: 5px;  height: 11px; background: #1abc9c; --dur: 2.2s; --sway-dur: 0.7s;  --drift: -30px; animation-delay: 0.1s; }
-.pc8  { left: 64%; width: 9px;  height: 5px; background: #ff6f00; --dur: 1.8s; --sway-dur: 0.55s; --drift: 15px;  animation-delay: 0.07s; }
-.pc9  { left: 72%; width: 6px;  height: 10px; background: #7c4dff; --dur: 2.0s; --sway-dur: 0.6s;  --drift: -22px; animation-delay: 0.18s; }
-.pc10 { left: 80%; width: 11px; height: 6px; background: #00bcd4; --dur: 1.7s; --sway-dur: 0.5s;  --drift: 32px;  animation-delay: 0.04s; }
-.pc11 { left: 88%; width: 7px;  height: 9px; background: #e74c3c; --dur: 1.9s; --sway-dur: 0.65s; --drift: -20px; animation-delay: 0.13s; }
-.pc12 { left: 10%; width: 8px;  height: 4px; background: #4caf50; --dur: 2.1s; --sway-dur: 0.55s; --drift: 26px;  animation-delay: 0.06s; }
-.pc13 { left: 46%; width: 5px;  height: 8px; background: #ff9800; --dur: 1.5s; --sway-dur: 0.45s; --drift: -15px; animation-delay: 0.01s; }
-.pc14 { left: 33%; width: 10px; height: 5px; background: #e91e63; --dur: 2.0s; --sway-dur: 0.6s;  --drift: 20px;  animation-delay: 0.11s; }
-.pc15 { left: 70%; width: 6px;  height: 11px; background: #2ecc71; --dur: 1.8s; --sway-dur: 0.5s;  --drift: -28px; animation-delay: 0.09s; }
+.pc0  { left: 8%;  background: #e74c3c; --cr: 280deg; animation-delay: 0s; }
+.pc1  { left: 15%; background: #f39c12; --cr: -200deg; animation-delay: 0.05s; }
+.pc2  { left: 22%; background: #2ecc71; --cr: 320deg; animation-delay: 0.02s; }
+.pc3  { left: 30%; background: #3498db; --cr: -250deg; animation-delay: 0.08s; }
+.pc4  { left: 38%; background: #9b59b6; --cr: 200deg; animation-delay: 0.03s; }
+.pc5  { left: 45%; background: #f1c40f; --cr: -300deg; animation-delay: 0.06s; }
+.pc6  { left: 52%; background: #e91e63; --cr: 260deg; animation-delay: 0.01s; }
+.pc7  { left: 60%; background: #1abc9c; --cr: -220deg; animation-delay: 0.07s; }
+.pc8  { left: 68%; background: #e74c3c; --cr: 310deg; animation-delay: 0.04s; width: 6px; height: 6px; }
+.pc9  { left: 75%; background: #f39c12; --cr: -270deg; animation-delay: 0.09s; width: 10px; height: 10px; }
+.pc10 { left: 82%; background: #3498db; --cr: 240deg; animation-delay: 0.02s; }
+.pc11 { left: 90%; background: #2ecc71; --cr: -290deg; animation-delay: 0.06s; }
+.pc12 { left: 5%;  background: #9b59b6; --cr: 300deg; animation-delay: 0.04s; width: 10px; height: 10px; }
+.pc13 { left: 48%; background: #f1c40f; --cr: -240deg; animation-delay: 0.01s; width: 6px; height: 6px; }
+.pc14 { left: 35%; background: #e91e63; --cr: 270deg; animation-delay: 0.07s; }
+.pc15 { left: 65%; background: #1abc9c; --cr: -260deg; animation-delay: 0.03s; }
 
-@keyframes confetti-drop {
-  0%   { transform: translateY(0) rotate(0deg) scaleX(1); opacity: 1; }
-  15%  { transform: translateY(12vh) rotate(45deg) scaleX(0.3); opacity: 1; }
-  30%  { transform: translateY(28vh) rotate(120deg) scaleX(1); opacity: 1; }
-  50%  { transform: translateY(50vh) rotate(220deg) scaleX(0.4); opacity: 0.9; }
-  70%  { transform: translateY(72vh) rotate(340deg) scaleX(1); opacity: 0.7; }
-  85%  { transform: translateY(88vh) rotate(430deg) scaleX(0.5); opacity: 0.4; }
-  100% { transform: translateY(105vh) rotate(520deg) scaleX(0.7); opacity: 0; }
+@keyframes confetti-fall {
+  0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+  100% { transform: translateY(calc(100vh + 20px)) rotate(var(--cr)) scale(0.6); opacity: 0.7; }
 }
 
-@keyframes confetti-sway {
-  0%   { translate: calc(var(--drift, 20px) * -1) 0; }
-  100% { translate: var(--drift, 20px) 0; }
+/* --- Pixel Rain confetti --- */
+.pixel-rain-dot {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  top: -8px;
+  image-rendering: pixelated;
+  border-radius: 0;
+  animation: confetti-rain var(--rd, 0.9s) linear forwards;
+}
+
+.prd0  { left: 3%;  background: #e74c3c; --rd: 0.7s;  animation-delay: 0s; }
+.prd1  { left: 7%;  background: #f39c12; --rd: 1.1s;  animation-delay: 0.15s; }
+.prd2  { left: 12%; background: #f1c40f; --rd: 0.8s;  animation-delay: 0.05s; }
+.prd3  { left: 17%; background: #2ecc71; --rd: 1.0s;  animation-delay: 0.25s; }
+.prd4  { left: 22%; background: #3498db; --rd: 0.75s; animation-delay: 0.1s; }
+.prd5  { left: 27%; background: #9b59b6; --rd: 1.2s;  animation-delay: 0.3s; }
+.prd6  { left: 32%; background: #e91e63; --rd: 0.85s; animation-delay: 0.02s; }
+.prd7  { left: 37%; background: #1abc9c; --rd: 1.0s;  animation-delay: 0.18s; }
+.prd8  { left: 42%; background: #ff6f00; --rd: 0.7s;  animation-delay: 0.08s; }
+.prd9  { left: 47%; background: #7c4dff; --rd: 1.1s;  animation-delay: 0.22s; }
+.prd10 { left: 52%; background: #e74c3c; --rd: 0.9s;  animation-delay: 0.12s; }
+.prd11 { left: 57%; background: #f1c40f; --rd: 0.75s; animation-delay: 0.35s; }
+.prd12 { left: 62%; background: #2ecc71; --rd: 1.0s;  animation-delay: 0.04s; }
+.prd13 { left: 67%; background: #3498db; --rd: 0.85s; animation-delay: 0.2s; }
+.prd14 { left: 72%; background: #9b59b6; --rd: 1.15s; animation-delay: 0.07s; }
+.prd15 { left: 77%; background: #e91e63; --rd: 0.8s;  animation-delay: 0.28s; }
+.prd16 { left: 82%; background: #1abc9c; --rd: 0.95s; animation-delay: 0.14s; }
+.prd17 { left: 87%; background: #f39c12; --rd: 0.7s;  animation-delay: 0.4s; }
+.prd18 { left: 92%; background: #ff6f00; --rd: 1.05s; animation-delay: 0.03s; }
+.prd19 { left: 97%; background: #7c4dff; --rd: 0.85s; animation-delay: 0.16s; }
+.prd20 { left: 5%;  background: #e74c3c; --rd: 1.1s;  animation-delay: 0.32s; }
+.prd21 { left: 15%; background: #2ecc71; --rd: 0.75s; animation-delay: 0.45s; }
+.prd22 { left: 25%; background: #3498db; --rd: 0.9s;  animation-delay: 0.38s; }
+.prd23 { left: 35%; background: #f1c40f; --rd: 1.0s;  animation-delay: 0.42s; }
+.prd24 { left: 45%; background: #9b59b6; --rd: 0.8s;  animation-delay: 0.36s; }
+.prd25 { left: 55%; background: #e91e63; --rd: 1.15s; animation-delay: 0.48s; }
+.prd26 { left: 65%; background: #1abc9c; --rd: 0.7s;  animation-delay: 0.33s; }
+.prd27 { left: 75%; background: #f39c12; --rd: 0.95s; animation-delay: 0.44s; }
+.prd28 { left: 85%; background: #e74c3c; --rd: 0.85s; animation-delay: 0.37s; }
+.prd29 { left: 95%; background: #2ecc71; --rd: 1.0s;  animation-delay: 0.41s; }
+
+/* --- Wave Rain celebration --- */
+.wave-rain-dot {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  top: -10px;
+  image-rendering: pixelated;
+  border-radius: 0;
+}
+.wr0  { left: 5%;  background: #f1c40f; animation: confetti-rain 0.8s linear 0s forwards; }
+.wr1  { left: 13%; background: #e74c3c; animation: confetti-rain 0.8s linear 0.06s forwards; }
+.wr2  { left: 21%; background: #3498db; animation: confetti-rain 0.8s linear 0.12s forwards; }
+.wr3  { left: 29%; background: #2ecc71; animation: confetti-rain 0.8s linear 0.18s forwards; }
+.wr4  { left: 37%; background: #9b59b6; animation: confetti-rain 0.8s linear 0.24s forwards; }
+.wr5  { left: 45%; background: #f39c12; animation: confetti-rain 0.8s linear 0.30s forwards; }
+.wr6  { left: 53%; background: #e91e63; animation: confetti-rain 0.8s linear 0.36s forwards; }
+.wr7  { left: 61%; background: #1abc9c; animation: confetti-rain 0.8s linear 0.42s forwards; }
+.wr8  { left: 69%; background: #ff6f00; animation: confetti-rain 0.8s linear 0.48s forwards; }
+.wr9  { left: 77%; background: #7c4dff; animation: confetti-rain 0.8s linear 0.54s forwards; }
+.wr10 { left: 85%; background: #f1c40f; animation: confetti-rain 0.8s linear 0.60s forwards; }
+.wr11 { left: 93%; background: #e74c3c; animation: confetti-rain 0.8s linear 0.66s forwards; }
+.wr12 { left: 9%;  background: #3498db; animation: confetti-rain 1.1s linear 0.4s forwards; }
+.wr13 { left: 17%; background: #2ecc71; animation: confetti-rain 1.1s linear 0.46s forwards; }
+.wr14 { left: 25%; background: #9b59b6; animation: confetti-rain 1.1s linear 0.52s forwards; }
+.wr15 { left: 33%; background: #f39c12; animation: confetti-rain 1.1s linear 0.58s forwards; }
+.wr16 { left: 41%; background: #e91e63; animation: confetti-rain 1.1s linear 0.64s forwards; }
+.wr17 { left: 49%; background: #1abc9c; animation: confetti-rain 1.1s linear 0.70s forwards; }
+.wr18 { left: 57%; background: #ff6f00; animation: confetti-rain 1.1s linear 0.76s forwards; }
+.wr19 { left: 65%; background: #7c4dff; animation: confetti-rain 1.1s linear 0.82s forwards; }
+.wr20 { left: 73%; background: #f1c40f; animation: confetti-rain 1.1s linear 0.88s forwards; }
+.wr21 { left: 81%; background: #e74c3c; animation: confetti-rain 1.1s linear 0.94s forwards; }
+.wr22 { left: 89%; background: #3498db; animation: confetti-rain 1.1s linear 1.0s forwards; }
+.wr23 { left: 97%; background: #2ecc71; animation: confetti-rain 1.1s linear 1.06s forwards; }
+
+/* --- Sparkle Rain celebration --- */
+.sparkle-rain-dot {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  top: -10px;
+  image-rendering: pixelated;
+  border-radius: 0;
+}
+.sr0  { left: 4%;  background: #f1c40f; animation: rain-sparkle-fall 1.2s ease-in 0s forwards; }
+.sr1  { left: 12%; background: #e74c3c; animation: rain-sparkle-fall 1.5s ease-in 0.08s forwards; }
+.sr2  { left: 20%; background: #3498db; animation: rain-sparkle-fall 1.0s ease-in 0.16s forwards; }
+.sr3  { left: 28%; background: #2ecc71; animation: rain-sparkle-fall 1.3s ease-in 0.04s forwards; }
+.sr4  { left: 36%; background: #9b59b6; animation: rain-sparkle-fall 1.6s ease-in 0.12s forwards; }
+.sr5  { left: 44%; background: #f39c12; animation: rain-sparkle-fall 1.1s ease-in 0.2s forwards; }
+.sr6  { left: 52%; background: #e91e63; animation: rain-sparkle-fall 1.4s ease-in 0.06s forwards; }
+.sr7  { left: 60%; background: #1abc9c; animation: rain-sparkle-fall 1.2s ease-in 0.14s forwards; }
+.sr8  { left: 68%; background: #ff6f00; animation: rain-sparkle-fall 1.5s ease-in 0.22s forwards; }
+.sr9  { left: 76%; background: #7c4dff; animation: rain-sparkle-fall 1.0s ease-in 0.02s forwards; }
+.sr10 { left: 84%; background: #f1c40f; animation: rain-sparkle-fall 1.3s ease-in 0.1s forwards; }
+.sr11 { left: 92%; background: #e74c3c; animation: rain-sparkle-fall 1.1s ease-in 0.18s forwards; }
+.sr12 { left: 8%;  background: #3498db; animation: rain-sparkle-fall 1.4s ease-in 0.24s forwards; }
+.sr13 { left: 16%; background: #2ecc71; animation: rain-sparkle-fall 1.6s ease-in 0.05s forwards; }
+.sr14 { left: 24%; background: #9b59b6; animation: rain-sparkle-fall 1.2s ease-in 0.13s forwards; }
+.sr15 { left: 32%; background: #e91e63; animation: rain-sparkle-fall 1.0s ease-in 0.21s forwards; }
+.sr16 { left: 40%; background: #1abc9c; animation: rain-sparkle-fall 1.5s ease-in 0.07s forwards; }
+.sr17 { left: 48%; background: #ff6f00; animation: rain-sparkle-fall 1.3s ease-in 0.15s forwards; }
+.sr18 { left: 56%; background: #7c4dff; animation: rain-sparkle-fall 1.1s ease-in 0.23s forwards; }
+.sr19 { left: 64%; background: #f1c40f; animation: rain-sparkle-fall 1.4s ease-in 0.03s forwards; }
+.sr20 { left: 72%; background: #f39c12; animation: rain-sparkle-fall 1.2s ease-in 0.11s forwards; }
+.sr21 { left: 80%; background: #e74c3c; animation: rain-sparkle-fall 1.6s ease-in 0.19s forwards; }
+.sr22 { left: 88%; background: #3498db; animation: rain-sparkle-fall 1.0s ease-in 0.01s forwards; }
+.sr23 { left: 96%; background: #2ecc71; animation: rain-sparkle-fall 1.5s ease-in 0.09s forwards; }
+
+/* Rain B: gentle drift as it falls */
+@keyframes rain-gentle-fall {
+  0%   { transform: translateY(0) translateX(0); opacity: 1; }
+  50%  { transform: translateY(50vh) translateX(var(--drift)); opacity: 0.9; }
+  100% { transform: translateY(105vh) translateX(calc(var(--drift) * -0.5)); opacity: 0; }
+}
+
+/* Rain D: twinkle while falling */
+@keyframes rain-sparkle-fall {
+  0%   { transform: translateY(0) scale(1); opacity: 1; }
+  20%  { transform: translateY(20vh) scale(1.4); opacity: 1; }
+  40%  { transform: translateY(40vh) scale(0.6); opacity: 0.8; }
+  60%  { transform: translateY(60vh) scale(1.3); opacity: 1; }
+  80%  { transform: translateY(80vh) scale(0.7); opacity: 0.6; }
+  100% { transform: translateY(105vh) scale(0.4); opacity: 0; }
 }
 
 /* Preview option B: center burst */
@@ -769,6 +886,90 @@
   30%  { transform: translate(calc(var(--bx) * 0.4), calc(var(--by) * 0.4)) rotate(calc(var(--br) * 0.3)) scale(1.2); opacity: 1; }
   100% { transform: translate(var(--bx), calc(var(--by) + 40px)) rotate(var(--br)) scale(0.6); opacity: 0; }
 }
+
+/* --- Twinkle Scatter celebration --- */
+.twinkle-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  image-rendering: pixelated;
+  border-radius: 0;
+  animation: sparkle-twinkle 0.7s ease-out forwards;
+}
+.td0  { left: 8%;  top: 15%; background: #f1c40f; animation-delay: 0s; }
+.td1  { left: 22%; top: 40%; background: #e74c3c; animation-delay: 0.06s; }
+.td2  { left: 35%; top: 12%; background: #3498db; animation-delay: 0.12s; }
+.td3  { left: 50%; top: 55%; background: #2ecc71; animation-delay: 0.18s; }
+.td4  { left: 65%; top: 25%; background: #9b59b6; animation-delay: 0.24s; }
+.td5  { left: 78%; top: 48%; background: #f39c12; animation-delay: 0.30s; }
+.td6  { left: 90%; top: 18%; background: #e91e63; animation-delay: 0.36s; }
+.td7  { left: 15%; top: 60%; background: #1abc9c; animation-delay: 0.42s; }
+.td8  { left: 42%; top: 32%; background: #ff6f00; animation-delay: 0.08s; }
+.td9  { left: 58%; top: 68%; background: #7c4dff; animation-delay: 0.14s; }
+.td10 { left: 72%; top: 10%; background: #f1c40f; animation-delay: 0.20s; }
+.td11 { left: 85%; top: 58%; background: #e74c3c; animation-delay: 0.26s; }
+.td12 { left: 5%;  top: 45%; background: #3498db; animation-delay: 0.32s; }
+.td13 { left: 30%; top: 70%; background: #2ecc71; animation-delay: 0.38s; }
+.td14 { left: 48%; top: 20%; background: #9b59b6; animation-delay: 0.10s; }
+.td15 { left: 62%; top: 42%; background: #e91e63; animation-delay: 0.22s; }
+
+/* --- Rising Bubbles celebration --- */
+.rising-dot {
+  position: absolute;
+  bottom: -10px;
+  image-rendering: pixelated;
+  border-radius: 0;
+  animation: sparkle-rise 1.2s ease-out forwards;
+}
+.rd0  { left: 8%;  width: 6px;  height: 6px;  background: #f1c40f; --drift: -12px; animation-delay: 0s; }
+.rd1  { left: 16%; width: 8px;  height: 8px;  background: #e74c3c; --drift: 18px;  animation-delay: 0.08s; }
+.rd2  { left: 24%; width: 5px;  height: 5px;  background: #3498db; --drift: -8px;  animation-delay: 0.16s; }
+.rd3  { left: 32%; width: 10px; height: 10px; background: #2ecc71; --drift: 22px;  animation-delay: 0.24s; }
+.rd4  { left: 40%; width: 7px;  height: 7px;  background: #9b59b6; --drift: -15px; animation-delay: 0.32s; }
+.rd5  { left: 48%; width: 5px;  height: 5px;  background: #f39c12; --drift: 10px;  animation-delay: 0.06s; }
+.rd6  { left: 56%; width: 9px;  height: 9px;  background: #e91e63; --drift: -20px; animation-delay: 0.14s; }
+.rd7  { left: 64%; width: 6px;  height: 6px;  background: #1abc9c; --drift: 14px;  animation-delay: 0.22s; }
+.rd8  { left: 72%; width: 8px;  height: 8px;  background: #ff6f00; --drift: -10px; animation-delay: 0.30s; }
+.rd9  { left: 80%; width: 5px;  height: 5px;  background: #7c4dff; --drift: 16px;  animation-delay: 0.10s; }
+.rd10 { left: 88%; width: 7px;  height: 7px;  background: #f1c40f; --drift: -18px; animation-delay: 0.18s; }
+.rd11 { left: 95%; width: 6px;  height: 6px;  background: #e74c3c; --drift: 8px;   animation-delay: 0.26s; }
+
+/* --- Pixel Fireworks celebration --- */
+.fw-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  image-rendering: pixelated;
+  border-radius: 0;
+  animation: sparkle-firework 0.8s ease-out forwards;
+}
+/* Burst 1: top-left area */
+.fw0  { left: 25%; top: 35%; background: #f1c40f; --fx: -50px; --fy: -55px; animation-delay: 0s; }
+.fw1  { left: 25%; top: 35%; background: #e74c3c; --fx: 45px;  --fy: -50px; animation-delay: 0.02s; }
+.fw2  { left: 25%; top: 35%; background: #3498db; --fx: -55px; --fy: 20px;  animation-delay: 0.04s; }
+.fw3  { left: 25%; top: 35%; background: #2ecc71; --fx: 50px;  --fy: 25px;  animation-delay: 0.01s; }
+.fw4  { left: 25%; top: 35%; background: #9b59b6; --fx: -10px; --fy: -60px; animation-delay: 0.03s; }
+.fw5  { left: 25%; top: 35%; background: #f39c12; --fx: 15px;  --fy: 55px;  animation-delay: 0.05s; }
+.fw6  { left: 25%; top: 35%; background: #e91e63; --fx: -45px; --fy: -15px; animation-delay: 0.02s; }
+.fw7  { left: 25%; top: 35%; background: #1abc9c; --fx: 55px;  --fy: -10px; animation-delay: 0.04s; }
+/* Burst 2: top-right area */
+.fw8  { left: 70%; top: 25%; background: #ff6f00; --fx: -45px; --fy: -50px; animation-delay: 0.2s; }
+.fw9  { left: 70%; top: 25%; background: #7c4dff; --fx: 50px;  --fy: -45px; animation-delay: 0.22s; }
+.fw10 { left: 70%; top: 25%; background: #f1c40f; --fx: -50px; --fy: 25px;  animation-delay: 0.24s; }
+.fw11 { left: 70%; top: 25%; background: #e74c3c; --fx: 45px;  --fy: 30px;  animation-delay: 0.21s; }
+.fw12 { left: 70%; top: 25%; background: #3498db; --fx: -15px; --fy: -55px; animation-delay: 0.23s; }
+.fw13 { left: 70%; top: 25%; background: #2ecc71; --fx: 10px;  --fy: 50px;  animation-delay: 0.25s; }
+.fw14 { left: 70%; top: 25%; background: #9b59b6; --fx: -55px; --fy: -10px; animation-delay: 0.22s; }
+.fw15 { left: 70%; top: 25%; background: #e91e63; --fx: 50px;  --fy: -15px; animation-delay: 0.24s; }
+/* Burst 3: center area */
+.fw16 { left: 50%; top: 45%; background: #1abc9c; --fx: -40px; --fy: -50px; animation-delay: 0.4s; }
+.fw17 { left: 50%; top: 45%; background: #ff6f00; --fx: 45px;  --fy: -45px; animation-delay: 0.42s; }
+.fw18 { left: 50%; top: 45%; background: #7c4dff; --fx: -50px; --fy: 20px;  animation-delay: 0.44s; }
+.fw19 { left: 50%; top: 45%; background: #f1c40f; --fx: 50px;  --fy: 25px;  animation-delay: 0.41s; }
+.fw20 { left: 50%; top: 45%; background: #e74c3c; --fx: -10px; --fy: -55px; animation-delay: 0.43s; }
+.fw21 { left: 50%; top: 45%; background: #3498db; --fx: 15px;  --fy: 50px;  animation-delay: 0.45s; }
+.fw22 { left: 50%; top: 45%; background: #2ecc71; --fx: -50px; --fy: -20px; animation-delay: 0.42s; }
+.fw23 { left: 50%; top: 45%; background: #f39c12; --fx: 55px;  --fy: -5px;  animation-delay: 0.44s; }
 
 /* --- Sparkle preview options --- */
 @keyframes sparkle-twinkle {
@@ -1579,8 +1780,10 @@
 
 .evo-ring-star {
   position: absolute;
-  font-size: 1.2rem;
-  color: #f1c40f;
+  width: 4px;
+  height: 4px;
+  background: #f1c40f;
+  image-rendering: pixelated;
   animation: evo-orbit 3s linear infinite;
 }
 

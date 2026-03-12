@@ -1,4 +1,4 @@
-import { creatureData, creatureOrder, getEvolutionStage, getCreaturePalette, getCreatureDisplayName } from '../data/creatures';
+import { creatureData, creatureOrder, getEvolutionStage, getCreaturePalette, getCreaturePixels, getCreatureDisplayName } from '../data/creatures';
 import PixelCreature from './PixelCreature';
 
 export default function Collection({ gameState, onBack }) {
@@ -26,7 +26,7 @@ export default function Collection({ gameState, onBack }) {
           return (
             <div key={id} className={`coll-list-card ${caught ? 'caught' : 'locked'} ${stage >= 3 ? 'ultimate' : stage >= 2 ? 'evolved' : ''}`}>
               <div className={`coll-list-creature ${stage >= 3 ? 'glow-ultimate' : stage >= 2 ? 'glow-evolved' : ''}`}>
-                <PixelCreature pixels={creature.pixels} palette={palette} size={5} />
+                <PixelCreature pixels={caught ? getCreaturePixels(creature, stage) : creature.pixels} palette={palette} size={5} />
               </div>
               <div className="coll-list-info">
                 <span className="coll-list-name">

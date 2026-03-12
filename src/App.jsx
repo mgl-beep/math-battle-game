@@ -2,7 +2,7 @@ import { useState, useCallback, useRef } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { useGameState } from './hooks/useGameState';
 import { checkBadges, badgeDefinitions } from './data/badges';
-import { creatureData, creatureOrder, starterCreature, getEvolutionStage, getCreaturePalette, getCreatureDisplayName } from './data/creatures';
+import { creatureData, creatureOrder, starterCreature, getEvolutionStage, getCreaturePalette, getCreaturePixels, getCreatureDisplayName } from './data/creatures';
 import PixelCreature from './components/PixelCreature';
 import HomeScreen from './components/HomeScreen';
 import LevelSelect from './components/LevelSelect';
@@ -12,6 +12,7 @@ import Shop from './components/Shop';
 import BadgeWall from './components/BadgeWall';
 import ThemeSwitcher from './components/ThemeSwitcher';
 import CelebrationPreview from './components/CelebrationPreview';
+import EvolutionPreview from './components/EvolutionPreview';
 import './App.css';
 
 export default function App() {
@@ -218,7 +219,7 @@ export default function App() {
       )}
 
       {screen === 'celebrations' && (
-        <CelebrationPreview onBack={() => navigate('home')} />
+        <EvolutionPreview onBack={() => navigate('home')} />
       )}
 
       {screen === 'badges' && (
@@ -232,6 +233,8 @@ export default function App() {
         const creature = creatureData[evolution.creatureId];
         const oldPalette = getCreaturePalette(creature, evolution.oldStage);
         const newPalette = getCreaturePalette(creature, evolution.newStage);
+        const oldPixels = getCreaturePixels(creature, evolution.oldStage);
+        const newPixels = getCreaturePixels(creature, evolution.newStage);
         const oldName = getCreatureDisplayName(creature, evolution.oldStage);
         const newName = getCreatureDisplayName(creature, evolution.newStage);
         const isUltimate = evolution.newStage >= 3;
@@ -241,18 +244,18 @@ export default function App() {
               <h2 className="evo-title">{isUltimate ? 'Ultimate Evolution!' : 'Your creature evolved!'}</h2>
               <div className="evo-transform">
                 <div className="evo-old">
-                  <PixelCreature pixels={creature.pixels} palette={oldPalette} size={4} />
+                  <PixelCreature pixels={oldPixels} palette={oldPalette} size={4} />
                   <span className="evo-stage-label">{oldName}</span>
                 </div>
                 <div className="evo-arrow">→</div>
                 <div className={`evo-new ${isUltimate ? 'glow-ultimate' : 'glow-evolved'}`}>
-                  <PixelCreature pixels={creature.pixels} palette={newPalette} size={6} />
+                  <PixelCreature pixels={newPixels} palette={newPalette} size={6} />
                   <span className="evo-stage-label">{newName}</span>
                 </div>
               </div>
               <div className="evo-sparkle-ring">
                 {[...Array(8)].map((_, i) => (
-                  <span key={i} className={`evo-ring-star rs${i}`}>{isUltimate ? '★' : '✦'}</span>
+                  <span key={i} className={`evo-ring-star rs${i}`} />
                 ))}
               </div>
               <p className="evo-tap-hint">Tap to continue</p>

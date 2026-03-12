@@ -18,9 +18,11 @@ export default function BattleScreen({ level, operation = 'multiply', playerName
   const [speedStreak, setSpeedStreak] = useState(0);
   const [maxSpeedStreak, setMaxSpeedStreak] = useState(0);
   const [creatureHp, setCreatureHp] = useState(100);
-  const [celebration, setCelebration] = useState(null); // 'rainbow' | 'sparkles' | 'confetti'
+  const [celebration, setCelebration] = useState(null);
+  const [celebKey, setCelebKey] = useState(0);
   const inputRef = useRef(null);
-  const celebrationTypes = ['rainbow', 'sparkles', 'confetti'];
+  const celebTimerRef = useRef(null);
+  const celebrationTypes = ['rainbow', 'sparkles', 'confetti', 'twinkle', 'rising', 'firework'];
 
   const creatureId = creatureOrder[level - 1];
   const creature = creatureData[creatureId];
@@ -55,8 +57,10 @@ export default function BattleScreen({ level, operation = 'multiply', playerName
 
       setCreatureHp(prev => Math.max(0, prev - damage));
       setFlash('correct');
+      clearTimeout(celebTimerRef.current);
       setCelebration(celebrationTypes[Math.floor(Math.random() * celebrationTypes.length)]);
-      setTimeout(() => setCelebration(null), 2300);
+      setCelebKey(k => k + 1);
+      celebTimerRef.current = setTimeout(() => setCelebration(null), 2300);
 
       const newStreak = elapsed < 2 ? speedStreak + 1 : 0;
       setSpeedStreak(newStreak);
@@ -290,7 +294,7 @@ export default function BattleScreen({ level, operation = 'multiply', playerName
 
       {/* Correct answer celebrations — all pixel-art style */}
       {celebration === 'rainbow' && (
-        <div className="celeb-overlay celeb-rainbow">
+        <div key={`r-${celebKey}`} className="celeb-overlay celeb-rainbow">
           {[...Array(6)].map((_, i) => (
             <div key={i} className={`pixel-rainbow pr${i}`}>
               {['#e74c3c','#f39c12','#f1c40f','#2ecc71','#3498db','#9b59b6'].map((c, j) => (
@@ -301,16 +305,37 @@ export default function BattleScreen({ level, operation = 'multiply', playerName
         </div>
       )}
       {celebration === 'sparkles' && (
-        <div className="celeb-overlay celeb-sparkles">
+        <div key={`s-${celebKey}`} className="celeb-overlay celeb-sparkles">
           {[...Array(10)].map((_, i) => (
             <span key={i} className={`pixel-star ps${i}`} />
           ))}
         </div>
       )}
       {celebration === 'confetti' && (
-        <div className="celeb-overlay celeb-confetti">
+        <div key={`c-${celebKey}`} className="celeb-overlay">
+          {[...Array(24)].map((_, i) => (
+            <span key={i} className={`sparkle-rain-dot sr${i}`} />
+          ))}
+        </div>
+      )}
+      {celebration === 'twinkle' && (
+        <div key={`t-${celebKey}`} className="celeb-overlay">
           {[...Array(16)].map((_, i) => (
-            <span key={i} className={`pixel-confetti pc${i}`} />
+            <span key={i} className={`twinkle-dot td${i}`} />
+          ))}
+        </div>
+      )}
+      {celebration === 'rising' && (
+        <div key={`ri-${celebKey}`} className="celeb-overlay">
+          {[...Array(12)].map((_, i) => (
+            <span key={i} className={`rising-dot rd${i}`} />
+          ))}
+        </div>
+      )}
+      {celebration === 'firework' && (
+        <div key={`f-${celebKey}`} className="celeb-overlay">
+          {[...Array(24)].map((_, i) => (
+            <span key={i} className={`fw-dot fw${i}`} />
           ))}
         </div>
       )}
