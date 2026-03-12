@@ -31,12 +31,18 @@ function PixelOverlay({ itemId, className }) {
 
 export default function Shop({ gameState, onBuy, onEquip, onBack }) {
   const [activeCategory, setActiveCategory] = useState('hat');
+  const [previewHat, setPreviewHat] = useState(null);
+  const [previewAcc, setPreviewAcc] = useState(null);
   const { coins, ownedItems, equippedItems } = gameState;
 
   const filteredItems = shopItems.filter(item => item.category === activeCategory);
 
   const equippedHat = shopItems.find(i => i.id === equippedItems.hat);
   const equippedAcc = shopItems.find(i => i.id === equippedItems.accessory);
+
+  // Show preview hat/acc if set, otherwise show equipped
+  const displayHat = previewHat !== null ? shopItems.find(i => i.id === previewHat) : equippedHat;
+  const displayAcc = previewAcc !== null ? shopItems.find(i => i.id === previewAcc) : equippedAcc;
 
   return (
     <div className="shop-screen">
@@ -51,14 +57,15 @@ export default function Shop({ gameState, onBuy, onEquip, onBack }) {
 
       {/* Preview */}
       <div className="shop-preview">
-        <div className="creature-showcase small">
-          {equippedHat && <PixelOverlay itemId={equippedHat.id} className="equipped-hat pixel-hat small" />}
+        <div className="creature-showcase" style={{ width: 200, height: 220, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          {displayHat && <PixelOverlay itemId={displayHat.id} className={`equipped-hat pixel-hat ${displayHat.id}`} />}
           <PixelCreature
             pixels={starterCreature.pixels}
             palette={starterCreature.palette}
             size={4}
+            maxWidth={160}
           />
-          {equippedAcc && <PixelOverlay itemId={equippedAcc.id} className={`equipped-acc pixel-acc small acc-${equippedAcc.id}`} />}
+          {displayAcc && <PixelOverlay itemId={displayAcc.id} className={`equipped-acc pixel-acc acc-${displayAcc.id}`} />}
         </div>
       </div>
 
@@ -68,7 +75,7 @@ export default function Shop({ gameState, onBuy, onEquip, onBack }) {
           <button
             key={cat}
             className={`shop-tab ${activeCategory === cat ? 'active' : ''}`}
-            onClick={() => setActiveCategory(cat)}
+            onClick={() => { setActiveCategory(cat); setPreviewHat(null); setPreviewAcc(null); }}
           >
             {categoryLabels[cat]}
           </button>
@@ -82,8 +89,19 @@ export default function Shop({ gameState, onBuy, onEquip, onBack }) {
           const equipped = equippedItems[item.category] === item.id;
           const canAfford = coins >= item.price;
 
+          const isPreviewing = (item.category === 'hat' && previewHat === item.id) ||
+            (item.category === 'accessory' && previewAcc === item.id);
+
+          const handlePreview = () => {
+            if (item.category === 'hat') {
+              setPreviewHat(previewHat === item.id ? null : item.id);
+            } else if (item.category === 'accessory') {
+              setPreviewAcc(previewAcc === item.id ? null : item.id);
+            }
+          };
+
           return (
-            <div key={item.id} className={`shop-item ${equipped ? 'equipped' : ''}`}>
+            <div key={item.id} className={`shop-item ${equipped ? 'equipped' : ''} ${isPreviewing ? 'previewing' : ''}`} onClick={handlePreview}>
               <span className="shop-item-emoji">{item.emoji}</span>
               <div className="shop-item-info">
                 <span className="shop-item-name">{item.name}</span>

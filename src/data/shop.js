@@ -2,10 +2,10 @@
 export const shopItems = [
   // Hats
   { id: 'hat_cap', name: 'Baseball Cap', category: 'hat', price: 20, emoji: '🧢', color: '#e74c3c' },
-  { id: 'hat_wizard', name: 'Wizard Hat', category: 'hat', price: 50, emoji: '🎩', color: '#9b59b6' },
+  { id: 'hat_wizard', name: 'Wizard Hat', category: 'hat', price: 50, emoji: '🧙', color: '#9b59b6' },
   { id: 'hat_crown', name: 'Golden Crown', category: 'hat', price: 100, emoji: '👑', color: '#f1c40f' },
   { id: 'hat_flower', name: 'Flower Crown', category: 'hat', price: 30, emoji: '🌸', color: '#e91e63' },
-  { id: 'hat_party', name: 'Party Hat', category: 'hat', price: 40, emoji: '🎉', color: '#2ecc71' },
+  { id: 'hat_party', name: 'Top Hat', category: 'hat', price: 40, emoji: '🎩', color: '#2c2c2c' },
 
   // Accessories
   { id: 'acc_glasses', name: 'Cool Glasses', category: 'accessory', price: 25, emoji: '😎', color: '#34495e' },

@@ -47,7 +47,7 @@ export default function HomeScreen({ gameState, onNavigate, onSwitchPlayer }) {
       <div className="home-creature-area">
         <div className="creature-showcase">
           {equippedHat && (
-            <PixelOverlay itemId={equippedHat.id} className="equipped-hat pixel-hat" />
+            <PixelOverlay itemId={equippedHat.id} className={`equipped-hat pixel-hat ${equippedHat.id}`} />
           )}
           <div className="creature-bounce">
             <PixelCreature
@@ -61,7 +61,7 @@ export default function HomeScreen({ gameState, onNavigate, onSwitchPlayer }) {
           )}
         </div>
         <p className="creature-name">Sparky</p>
-        <p className="creature-subtitle">{playerName}'s Partner</p>
+        <p className="creature-subtitle">{playerName && playerName !== 'Player' ? `${playerName}'s Partner` : 'Your Partner'}</p>
       </div>
 
       <div className="home-stats">
@@ -101,7 +101,7 @@ export default function HomeScreen({ gameState, onNavigate, onSwitchPlayer }) {
       </div>
 
       <button className="switch-player-btn" onClick={onSwitchPlayer}>
-        Switch Player ({playerName})
+        {playerName && playerName !== 'Player' ? `Switch Player (${playerName})` : 'Log In to Save Progress'}
       </button>
     </div>
   );

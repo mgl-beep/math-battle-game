@@ -13,6 +13,7 @@ import BadgeWall from './components/BadgeWall';
 import ThemeSwitcher from './components/ThemeSwitcher';
 import CelebrationPreview from './components/CelebrationPreview';
 import EvolutionPreview from './components/EvolutionPreview';
+import FitCheck from './components/FitCheck';
 import './App.css';
 
 export default function App() {
@@ -133,6 +134,7 @@ export default function App() {
               </div>
             </div>
             <h1 className="name-entry-title">Math Battle!</h1>
+            <p className="name-entry-subtitle">Log in to save your progress</p>
 
             {playerList.length > 0 && (
               <div className="player-picker">
@@ -227,6 +229,10 @@ export default function App() {
           gameState={game.state}
           onBack={() => navigate('home')}
         />
+      )}
+
+      {screen === 'fitcheck' && (
+        <FitCheck onBack={() => navigate('home')} />
       )}
 
       {screen === 'evolution' && evolution && (() => {

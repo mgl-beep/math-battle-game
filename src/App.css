@@ -302,8 +302,19 @@
   top: 28px;
 }
 
+.equipped-hat.pixel-hat.hat_cap { top: 22px; }
+.equipped-hat.pixel-hat.hat_wizard { top: -16px; }
+.equipped-hat.pixel-hat.hat_crown { top: 12px; }
+.equipped-hat.pixel-hat.hat_flower { top: 34px; }
+.equipped-hat.pixel-hat.hat_party { top: 12px; width: 100px; }
+
 .equipped-hat.small { font-size: 1.5rem; top: -15px; }
-.equipped-hat.pixel-hat.small { width: 120px; top: 22px; }
+.equipped-hat.pixel-hat.small { width: 120px; top: 18px; }
+.equipped-hat.pixel-hat.hat_cap.small { top: 14px; }
+.equipped-hat.pixel-hat.hat_wizard.small { top: -16px; }
+.equipped-hat.pixel-hat.hat_crown.small { top: 5px; }
+.equipped-hat.pixel-hat.hat_flower.small { top: 24px; }
+.equipped-hat.pixel-hat.hat_party.small { top: 6px; width: 75px; }
 
 .equipped-acc {
   position: absolute;
@@ -314,7 +325,7 @@
 }
 
 .equipped-acc.pixel-acc {
-  width: 40px;
+  width: 60px;
   height: auto;
   bottom: 15px;
   right: -20px;
@@ -323,26 +334,30 @@
 /* Glasses sit on the face */
 .acc-acc_glasses {
   bottom: auto !important;
-  top: 38%;
+  top: 35%;
   right: auto !important;
   left: 50%;
-  transform: translateX(-50%);
-  width: 45px !important;
+  transform: translateX(-55%);
+  width: 100px !important;
 }
 
 /* Bow on the side of head */
 .acc-acc_bow {
   bottom: auto !important;
-  top: 5px;
-  right: -15px;
-  width: 30px !important;
+  top: 18%;
+  right: auto !important;
+  left: 55%;
+  width: 50px !important;
+  transform: rotate(15deg);
+  z-index: 3 !important;
 }
 
 /* Star badge on chest */
 .acc-acc_star {
-  bottom: 20px !important;
+  bottom: auto !important;
+  top: 55%;
   right: auto !important;
-  left: 50%;
+  left: 53%;
   transform: translateX(-50%);
   width: 28px !important;
 }
@@ -360,11 +375,11 @@
 /* Wings on the sides */
 .acc-acc_wings {
   bottom: auto !important;
-  top: 30%;
+  top: 20%;
   right: auto !important;
   left: 50%;
   transform: translateX(-50%);
-  width: 70px !important;
+  width: 240px !important;
   z-index: 0 !important;
 }
 
@@ -1552,6 +1567,25 @@
 .evo-bar-label { font-size: 0.7rem; font-weight: 700; color: var(--text-dim); white-space: nowrap; }
 .evo-next { font-size: 0.7rem; color: var(--text-dim); font-style: italic; }
 
+/* ===== Fit Check ===== */
+.fit-check-screen { padding-bottom: 2rem; }
+.fit-check-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 0.5rem 1rem;
+}
+.fit-check-item {
+  text-align: center;
+}
+.fit-check-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 0.25rem;
+  color: var(--text-primary);
+}
+
 /* ===== Shop ===== */
 .shop-screen { padding-bottom: 2rem; }
 
@@ -1613,6 +1647,20 @@
 .shop-item.equipped {
   border-color: #2ecc71;
   background: rgba(46, 204, 113, 0.05);
+}
+
+.shop-item.previewing {
+  border-color: #3498db;
+  background: rgba(52, 152, 219, 0.08);
+}
+
+.shop-item { cursor: pointer; }
+
+.preview-label {
+  font-size: 0.75rem;
+  color: #3498db;
+  margin-top: 0.25rem;
+  font-weight: 600;
 }
 
 .shop-item-emoji { font-size: 1.5rem; }
@@ -1901,4 +1949,4 @@
 .collection-card.ultimate { border-color: rgba(255, 215, 0, 0.3); }
 
 /* ===== Pixel Creature ===== */
-.pixel-creature { display: block; margin: 0 auto; }
+.pixel-creature { display: block; margin: 0 auto; position: relative; z-index: 1; }
