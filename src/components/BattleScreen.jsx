@@ -56,7 +56,7 @@ export default function BattleScreen({ level, operation = 'multiply', playerName
       setCreatureHp(prev => Math.max(0, prev - damage));
       setFlash('correct');
       setCelebration(celebrationTypes[Math.floor(Math.random() * 3)]);
-      setTimeout(() => setCelebration(null), 1500);
+      setTimeout(() => setCelebration(null), 2300);
 
       const newStreak = elapsed < 2 ? speedStreak + 1 : 0;
       setSpeedStreak(newStreak);
@@ -291,18 +291,22 @@ export default function BattleScreen({ level, operation = 'multiply', playerName
         </div>
       </div>
 
-      {/* Correct answer celebrations */}
+      {/* Correct answer celebrations — all pixel-art style */}
       {celebration === 'rainbow' && (
         <div className="celeb-overlay celeb-rainbow">
-          {[...Array(5)].map((_, i) => (
-            <div key={i} className={`mini-rainbow mr${i}`} />
+          {[...Array(6)].map((_, i) => (
+            <div key={i} className={`pixel-rainbow pr${i}`}>
+              {['#e74c3c','#f39c12','#f1c40f','#2ecc71','#3498db','#9b59b6'].map((c, j) => (
+                <span key={j} className="px-arc" style={{ background: c, bottom: `${j * 4}px` }} />
+              ))}
+            </div>
           ))}
         </div>
       )}
       {celebration === 'sparkles' && (
         <div className="celeb-overlay celeb-sparkles">
           {[...Array(10)].map((_, i) => (
-            <span key={i} className={`pixel-sparkle ps${i}`}>✦</span>
+            <span key={i} className={`pixel-star ps${i}`} />
           ))}
         </div>
       )}
