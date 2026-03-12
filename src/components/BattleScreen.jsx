@@ -55,7 +55,7 @@ export default function BattleScreen({ level, operation = 'multiply', playerName
 
       setCreatureHp(prev => Math.max(0, prev - damage));
       setFlash('correct');
-      setCelebration(celebrationTypes[Math.floor(Math.random() * 3)]);
+      setCelebration(celebrationTypes[Math.floor(Math.random() * celebrationTypes.length)]);
       setTimeout(() => setCelebration(null), 2300);
 
       const newStreak = elapsed < 2 ? speedStreak + 1 : 0;
@@ -314,7 +314,6 @@ export default function BattleScreen({ level, operation = 'multiply', playerName
           ))}
         </div>
       )}
-
       <div className="battle-question-area">
         <div className="question-display">
           <span className="question-text">{fact?.question} = ?</span>
