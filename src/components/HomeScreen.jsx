@@ -45,20 +45,21 @@ export default function HomeScreen({ gameState, onNavigate, onSwitchPlayer }) {
       </div>
 
       <div className="home-creature-area">
-        <div className="creature-showcase">
-          {equippedHat && (
-            <PixelOverlay itemId={equippedHat.id} className={`equipped-hat pixel-hat ${equippedHat.id}`} />
-          )}
-          <div className="creature-bounce">
+        <div className="creature-bounce">
+          <div className="creature-showcase" style={{ width: 200, height: 220, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            {equippedHat && (
+              <PixelOverlay itemId={equippedHat.id} className={`equipped-hat pixel-hat ${equippedHat.id}`} />
+            )}
             <PixelCreature
               pixels={starterCreature.pixels}
               palette={starterCreature.palette}
-              size={5}
+              size={4}
+              maxWidth={160}
             />
+            {equippedAcc && (
+              <PixelOverlay itemId={equippedAcc.id} className={`equipped-acc pixel-acc acc-${equippedAcc.id}`} />
+            )}
           </div>
-          {equippedAcc && (
-            <PixelOverlay itemId={equippedAcc.id} className={`equipped-acc pixel-acc acc-${equippedAcc.id}`} />
-          )}
         </div>
         <p className="creature-name">Sparky</p>
         <p className="creature-subtitle">{playerName && playerName !== 'Player' ? `${playerName}'s Partner` : 'Your Partner'}</p>
