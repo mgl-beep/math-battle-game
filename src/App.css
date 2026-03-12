@@ -231,14 +231,21 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #FFD700, #FFA000);
+  background: linear-gradient(135deg, #FFE44D 0%, #FFD700 40%, #FFA000 100%);
   color: #fff;
   font-size: 0.75rem;
   font-weight: 800;
-  box-shadow: 0 1px 3px rgba(255, 160, 0, 0.4);
+  box-shadow:
+    2px 2px 0px #c88200,
+    3px 3px 0px #b37400,
+    0 1px 4px rgba(255, 160, 0, 0.5);
+  border-top: 1.5px solid #fff3a0;
+  border-left: 1.5px solid #ffe680;
+  border-right: 1.5px solid #cc8800;
+  border-bottom: 1.5px solid #b37400;
   flex-shrink: 0;
 }
 .coin-amount { color: #f39c12; font-weight: 700; }
