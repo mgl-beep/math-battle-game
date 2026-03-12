@@ -103,7 +103,12 @@ export default function App() {
 
   const playerList = game.getPlayerList();
 
-  if (!game.state.playerName || showPlayerPicker) {
+  // Auto-set a default player name to skip name entry (temporarily disabled)
+  if (!game.state.playerName && !showPlayerPicker) {
+    game.setPlayerName('Player');
+  }
+
+  if (showPlayerPicker) {
     const handlePickPlayer = (name) => {
       game.setPlayerName(name);
       setShowPlayerPicker(false);
