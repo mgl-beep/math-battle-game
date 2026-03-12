@@ -28,8 +28,8 @@ function PixelOverlay({ itemId, className }) {
   );
 }
 
-export default function HomeScreen({ gameState, onNavigate }) {
-  const { coins, caughtCreatures, badges, equippedItems } = gameState;
+export default function HomeScreen({ gameState, onNavigate, onSwitchPlayer }) {
+  const { coins, caughtCreatures, badges, equippedItems, playerName } = gameState;
 
   const equippedHat = shopItems.find(i => i.id === equippedItems.hat);
   const equippedAcc = shopItems.find(i => i.id === equippedItems.accessory);
@@ -61,7 +61,7 @@ export default function HomeScreen({ gameState, onNavigate }) {
           )}
         </div>
         <p className="creature-name">Sparky</p>
-        <p className="creature-subtitle">Your Partner</p>
+        <p className="creature-subtitle">{playerName}'s Partner</p>
       </div>
 
       <div className="home-stats">
@@ -98,6 +98,10 @@ export default function HomeScreen({ gameState, onNavigate }) {
           <span className="menu-desc">{badges.length} earned</span>
         </button>
       </div>
+
+      <button className="switch-player-btn" onClick={onSwitchPlayer}>
+        Switch Player ({playerName})
+      </button>
     </div>
   );
 }

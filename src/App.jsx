@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { useGameState } from './hooks/useGameState';
 import { checkBadges, badgeDefinitions } from './data/badges';
@@ -19,6 +19,7 @@ export default function App() {
   const [battleOperation, setBattleOperation] = useState('multiply');
   const [newBadges, setNewBadges] = useState([]);
   const [evolution, setEvolution] = useState(null); // { creatureId, oldStage, newStage }
+  const [showPlayerPicker, setShowPlayerPicker] = useState(false);
   const game = useGameState();
 
   const navigate = useCallback((dest) => {
@@ -97,6 +98,73 @@ export default function App() {
     }
   };
 
+  const nameRef = useRef(null);
+  const [nameInput, setNameInput] = useState('');
+
+  const playerList = game.getPlayerList();
+
+  if (!game.state.playerName || showPlayerPicker) {
+    const handlePickPlayer = (name) => {
+      game.setPlayerName(name);
+      setShowPlayerPicker(false);
+    };
+    return (
+      <div className="app">
+        <ThemeSwitcher />
+        <div className="name-entry-screen">
+          <div className="name-entry-card">
+            {showPlayerPicker && (
+              <button className="picker-close" onClick={() => setShowPlayerPicker(false)}>✕</button>
+            )}
+            <div className="name-entry-creature">
+              <div className="creature-bounce">
+                <PixelCreature
+                  pixels={creatureData[creatureOrder[0]].pixels}
+                  palette={creatureData[creatureOrder[0]].palette}
+                  size={5}
+                />
+              </div>
+            </div>
+            <h1 className="name-entry-title">Math Battle!</h1>
+
+            {playerList.length > 0 && (
+              <div className="player-picker">
+                <p className="player-picker-label">Who's playing?</p>
+                <div className="player-list">
+                  {playerList.map(name => (
+                    <button key={name} className="player-btn" onClick={() => handlePickPlayer(name)}>
+                      {name}
+                    </button>
+                  ))}
+                </div>
+                <div className="player-divider"><span>or add new player</span></div>
+              </div>
+            )}
+
+            <form className="name-entry-form" onSubmit={(e) => {
+              e.preventDefault();
+              if (nameInput.trim()) handlePickPlayer(nameInput.trim());
+            }}>
+              <input
+                ref={nameRef}
+                type="text"
+                className="name-entry-input"
+                placeholder="Type your name..."
+                value={nameInput}
+                onChange={(e) => setNameInput(e.target.value)}
+                maxLength={20}
+                autoFocus={playerList.length === 0}
+              />
+              <button type="submit" className="name-entry-btn" disabled={!nameInput.trim()}>
+                Let's Go!
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="app">
       <ThemeSwitcher />
@@ -105,6 +173,7 @@ export default function App() {
         <HomeScreen
           gameState={game.state}
           onNavigate={navigate}
+          onSwitchPlayer={() => setShowPlayerPicker(true)}
         />
       )}
 
@@ -120,6 +189,7 @@ export default function App() {
         <BattleScreen
           level={battleLevel}
           operation={battleOperation}
+          playerName={game.state.playerName}
           onComplete={handleBattleComplete}
           onBack={() => navigate('levelSelect')}
         />

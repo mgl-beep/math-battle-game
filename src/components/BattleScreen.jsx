@@ -6,7 +6,7 @@ import PixelCreature from './PixelCreature';
 
 const ROUNDS = 10;
 
-export default function BattleScreen({ level, operation = 'multiply', onComplete, onBack }) {
+export default function BattleScreen({ level, operation = 'multiply', playerName = '', onComplete, onBack }) {
   const [phase, setPhase] = useState('intro'); // intro, battle, result
   const [facts, setFacts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -100,6 +100,7 @@ export default function BattleScreen({ level, operation = 'multiply', onComplete
       : 0;
     const missed = results.filter(r => !r.correct).map(r => r.question);
     supabase.from('battle_results').insert({
+      player_name: playerName || 'Anonymous',
       level,
       operation,
       correct: correctCount,

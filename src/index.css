@@ -134,8 +134,8 @@
 /* ===== Theme 8: Galaxy Sparkle ===== */
 [data-theme="galaxy"] {
   --bg: #0D0221;
-  --bg-card: #150538;
-  --bg-elevated: #1C0A4A;
+  --bg-card: rgba(15, 5, 40, 0.85);
+  --bg-elevated: rgba(25, 10, 60, 0.9);
   --text: #E8D5FF;
   --text-dim: #9B7BCC;
   --border: #3B1F7A;
@@ -144,6 +144,30 @@
   --card-shadow: 0 0 15px rgba(187, 134, 252, 0.1);
   --card-border-width: 1px;
   --card-border-style: solid;
+}
+
+[data-theme="galaxy"] body {
+  background:
+    radial-gradient(1px 1px at 10% 15%, #fff 50%, transparent 100%),
+    radial-gradient(1px 1px at 25% 35%, #ffe0ff 50%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 40% 8%, #fff 50%, transparent 100%),
+    radial-gradient(1px 1px at 55% 45%, #d0c0ff 50%, transparent 100%),
+    radial-gradient(1px 1px at 70% 20%, #fff 50%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 85% 55%, #ffe0ff 50%, transparent 100%),
+    radial-gradient(1px 1px at 15% 60%, #fff 50%, transparent 100%),
+    radial-gradient(1px 1px at 35% 75%, #d0c0ff 50%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 60% 65%, #fff 50%, transparent 100%),
+    radial-gradient(1px 1px at 80% 80%, #ffe0ff 50%, transparent 100%),
+    radial-gradient(1px 1px at 95% 40%, #fff 50%, transparent 100%),
+    radial-gradient(1px 1px at 5% 90%, #fff 50%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 50% 95%, #d0c0ff 50%, transparent 100%),
+    radial-gradient(1px 1px at 75% 5%, #fff 50%, transparent 100%),
+    radial-gradient(1px 1px at 20% 50%, #ffe0ff 50%, transparent 100%),
+    radial-gradient(1px 1px at 90% 70%, #fff 50%, transparent 100%),
+    radial-gradient(ellipse at 20% 80%, rgba(120, 40, 200, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(60, 20, 180, 0.12) 0%, transparent 50%),
+    #0D0221;
+  background-attachment: fixed;
 }
 
 /* ===== Theme 9: Crayon Box ===== */

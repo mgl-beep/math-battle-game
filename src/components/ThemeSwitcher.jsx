@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 
 export const themes = [
-  { id: 'default', name: 'Midnight (Current)', emoji: '🌙' },
-  { id: 'candy', name: 'Candy Pop', emoji: '🍬' },
   { id: 'pastel', name: 'Pastel Dream', emoji: '☁️' },
+  { id: 'candy', name: 'Candy Pop', emoji: '🍬' },
   { id: 'retro', name: 'Retro Arcade', emoji: '🕹️' },
   { id: 'storybook', name: 'Storybook', emoji: '📖' },
   { id: 'ocean', name: 'Ocean Breeze', emoji: '🌊' },
-  { id: 'forest', name: 'Enchanted Forest', emoji: '🌿' },
   { id: 'sunset', name: 'Sunset Glow', emoji: '🌅' },
   { id: 'galaxy', name: 'Galaxy Sparkle', emoji: '🌌' },
   { id: 'crayon', name: 'Crayon Box', emoji: '🖍️' },
@@ -15,7 +13,7 @@ export const themes = [
 ];
 
 export default function ThemeSwitcher() {
-  const [currentIndex, setCurrentIndex] = useState(2); // Default to Pastel Dream
+  const [currentIndex, setCurrentIndex] = useState(0); // Default to Pastel Dream
   const [open, setOpen] = useState(false);
 
   useEffect(() => {

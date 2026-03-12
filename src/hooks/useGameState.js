@@ -1,8 +1,10 @@
 import { useState, useCallback } from 'react';
 
-const STORAGE_KEY = 'math-battle-save';
+const PLAYERS_KEY = 'math-battle-players';   // { [name]: gameState }
+const ACTIVE_KEY = 'math-battle-active';     // current player name
 
 const defaultState = {
+  playerName: '',
   coins: 0,
   caughtCreatures: [],
   shinyCreatures: [],
@@ -13,28 +15,60 @@ const defaultState = {
   perfectRounds: 0,
   winStreak: 0,
   speedStreak: 0,
-  // Per-level stats: { [level]: { wins: 0, perfects: 0 } }
   levelStats: {},
 };
 
-function loadState() {
+function loadPlayers() {
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      return { ...defaultState, ...JSON.parse(saved) };
+    const saved = localStorage.getItem(PLAYERS_KEY);
+    return saved ? JSON.parse(saved) : {};
+  } catch { return {}; }
+}
+
+function savePlayers(players) {
+  try { localStorage.setItem(PLAYERS_KEY, JSON.stringify(players)); } catch {}
+}
+
+function getActivePlayer() {
+  try { return localStorage.getItem(ACTIVE_KEY) || ''; } catch { return ''; }
+}
+
+function setActivePlayer(name) {
+  try { localStorage.setItem(ACTIVE_KEY, name); } catch {}
+}
+
+// Migrate old single-save format
+function migrateOldSave() {
+  try {
+    const old = localStorage.getItem('math-battle-save');
+    if (old) {
+      const data = JSON.parse(old);
+      if (data.playerName) {
+        const players = loadPlayers();
+        if (!players[data.playerName]) {
+          players[data.playerName] = data;
+          savePlayers(players);
+          setActivePlayer(data.playerName);
+        }
+      }
+      localStorage.removeItem('math-battle-save');
     }
-  } catch (e) {
-    // ignore
-  }
-  return { ...defaultState };
+  } catch {}
+}
+
+function loadState() {
+  migrateOldSave();
+  const active = getActivePlayer();
+  if (!active) return { ...defaultState };
+  const players = loadPlayers();
+  return players[active] ? { ...defaultState, ...players[active] } : { ...defaultState };
 }
 
 function saveState(state) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  } catch (e) {
-    // ignore
-  }
+  if (!state.playerName) return;
+  const players = loadPlayers();
+  players[state.playerName] = state;
+  savePlayers(players);
 }
 
 export function useGameState() {
@@ -46,6 +80,31 @@ export function useGameState() {
       saveState(next);
       return next;
     });
+  }, []);
+
+  const setPlayerName = useCallback((name) => {
+    setActivePlayer(name);
+    const players = loadPlayers();
+    if (players[name]) {
+      // Existing player — load their save
+      const existing = { ...defaultState, ...players[name] };
+      setState(existing);
+    } else {
+      // New player — fresh state
+      const fresh = { ...defaultState, playerName: name };
+      players[name] = fresh;
+      savePlayers(players);
+      setState(fresh);
+    }
+  }, []);
+
+  const getPlayerList = useCallback(() => {
+    return Object.keys(loadPlayers());
+  }, []);
+
+  const switchPlayer = useCallback(() => {
+    setActivePlayer('');
+    setState({ ...defaultState });
   }, []);
 
   const addCoins = useCallback((amount) => {
@@ -122,6 +181,9 @@ export function useGameState() {
 
   return {
     state,
+    setPlayerName,
+    getPlayerList,
+    switchPlayer,
     addCoins,
     spendCoins,
     catchCreature,
@@ -134,4 +196,3 @@ export function useGameState() {
     update,
   };
 }
-
