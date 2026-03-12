@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { supabase } from '../lib/supabase';
 import { getBattleRound, routeColors } from '../data/mathFacts';
 import { creatureData, creatureOrder } from '../data/creatures';
 import PixelCreature from './PixelCreature';
@@ -89,6 +90,26 @@ export default function BattleScreen({ level, operation = 'multiply', onComplete
     }
     setInput('');
   }, [input, phase, facts, currentIndex, startTime, speedStreak]);
+
+  // Log battle results to Supabase
+  useEffect(() => {
+    if (phase !== 'result') return;
+    const correctCount = results.filter(r => r.correct).length;
+    const avgTime = results.length > 0
+      ? +(results.reduce((s, r) => s + r.time, 0) / results.length).toFixed(1)
+      : 0;
+    const missed = results.filter(r => !r.correct).map(r => r.question);
+    supabase.from('battle_results').insert({
+      level,
+      operation,
+      correct: correctCount,
+      total: ROUNDS,
+      avg_speed: avgTime,
+      won: correctCount >= 7,
+      perfect: correctCount === ROUNDS,
+      missed_facts: missed.join(', ') || null,
+    }).then();
+  }, [phase]);
 
   if (phase === 'intro') {
     return (
